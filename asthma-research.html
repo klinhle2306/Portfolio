@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personalized Asthma Risk Prediction on Imbalanced Data — Linh Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F6EDE8;
+    --ink: #1A1A1A;
+    --rose: #C4536B;
+    --muted: #6B5F5A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.7;
+  }
+  a { color: var(--rose); text-decoration: none; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+  }
+  .logo { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; }
+  .back { font-size: 13px; color: var(--muted); }
+  .back:hover { color: var(--ink); }
+
+  .meta {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(26px, 5vw, 36px);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .byline {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 46px 0 14px;
+  }
+  p { font-size: 15.5px; color: #3a3230; margin-bottom: 4px; }
+  .lead { font-size: 17px; color: var(--ink); }
+  ul { margin: 16px 0 0 20px; }
+  li { font-size: 15.5px; color: #3a3230; margin-bottom: 8px; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 30px 0;
+  }
+  .stat {
+    background: #fff;
+    border: 1px solid rgba(26,26,26,0.1);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--rose);
+  }
+  .stat .label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    margin: 40px 0 20px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 11px 20px;
+    border-radius: 24px;
+  }
+  .btn-solid { background: var(--ink); color: var(--cream); }
+  .btn-outline { border: 1px solid var(--ink); color: var(--ink); }
+
+  footer {
+    padding: 60px 0 60px;
+    border-top: 1px solid rgba(26,26,26,0.12);
+    margin-top: 60px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <a class="back" href="index.html">← Back</a>
+  </header>
+
+  <div class="meta">PUBLISHED RESEARCH · MACHINE LEARNING / HEALTHCARE DATA</div>
+  <h1>Personalized Asthma Risk Prediction on Imbalanced Data</h1>
+  <div class="byline">Angelo Alfonso, Linh Le, David Stanko · Mentored by Dr. Wan Bae · Seattle University, Dept. of Computer Science · Published, IEEE ICCDA 2023</div>
+
+  <h2>The problem</h2>
+  <p class="lead">Asthma risk datasets are small and lopsided — far more "low risk" records than "high risk" ones.</p>
+  <p>That imbalance quietly sabotages machine learning models. A model can score well on paper while barely ever catching the high-risk cases that actually matter, because it learns to just predict the majority class most of the time. The usual fix is generating synthetic samples of the minority class (SMOTE and its variants), but how well those techniques actually work hadn't been carefully compared against each other on real patient data.</p>
+
+  <h2>What we did</h2>
+  <p>We evaluated five existing SMOTE-style oversampling techniques and proposed three new ones, testing all of them across 24 real asthma patient datasets from Soonchunhyang University Bucheon Hospital, South Korea.</p>
+  <ul>
+    <li><strong>Average Neighbor Vector Oversampling (ANVO):</strong> generates new data points from the average difference between a minority point and its nearest neighbors.</li>
+    <li><strong>Incremental K-Means Clustering (IKC):</strong> clusters the minority class and generates new points from cluster averages, increasing cluster count each iteration for more diversity.</li>
+    <li><strong>SMOTEBoost / SMOTEBoostCC:</strong> adds a boosting step to standard SMOTE, testing multiple synthetic batches per iteration and keeping only the one that improves sensitivity most.</li>
+  </ul>
+
+  <h2>Results</h2>
+  <p>We tested every method across four classifiers (Decision Tree, Logistic Regression, k-Nearest Neighbors, Naïve Bayes) plus a transfer learning framework, measuring weighted accuracy, sensitivity, precision, F1, and specificity.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">24</div>
+      <div class="label">patient datasets tested</div>
+    </div>
+    <div class="stat">
+      <div class="num">+25%</div>
+      <div class="label">predictive accuracy gain, best method</div>
+    </div>
+    <div class="stat">
+      <div class="num">8</div>
+      <div class="label">oversampling methods compared</div>
+    </div>
+  </div>
+
+  <p>SMOTEBoostCC, one of our proposed methods, came out on top overall — highest weighted accuracy (0.645) and sensitivity (0.545) among every method tested, meaningfully ahead of the untouched original data and standard SMOTE. The proposed methods held their own against established techniques, which was the core question we set out to answer.</p>
+
+  <h2>Why it mattered to me</h2>
+  <p>This was my first real experience with the gap between "a model that scores well" and "a model that's actually useful" — in healthcare specifically, missing a high-risk case is a much bigger problem than a false alarm, so optimizing for the wrong metric has real consequences. It's also where I first got comfortable presenting technical findings to people who weren't in the room for the math, which turned out to matter far more in my career since than the SMOTE variants themselves.</p>
+
+  <div class="cta-row">
+    <a class="btn btn-solid" href="https://ieeexplore.ieee.org/document/10314855" target="_blank">Read the published paper →</a>
+    <a class="btn btn-outline" href="Asthma_Research_Poster.pdf" target="_blank">View research poster</a>
+  </div>
+
+  <footer>
+    Linh Le · Houston, TX
+  </footer>
+</div>
+</body>
+</html>

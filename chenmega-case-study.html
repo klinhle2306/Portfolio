@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing production traceability at ChenMega — Linh Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F6EDE8;
+    --ink: #1A1A1A;
+    --rose: #C4536B;
+    --muted: #6B5F5A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.7;
+  }
+  a { color: var(--rose); text-decoration: none; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+  }
+  .logo { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; }
+  .back { font-size: 13px; color: var(--muted); }
+  .back:hover { color: var(--ink); }
+
+  .meta {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.25;
+    max-width: 16ch;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 46px 0 14px;
+  }
+  p { font-size: 15.5px; color: #3a3230; margin-bottom: 4px; }
+  .lead { font-size: 17px; color: var(--ink); }
+
+  .figure {
+    margin: 30px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(26,26,26,0.12);
+    padding: 20px;
+    background: #fff;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  footer {
+    padding: 60px 0 60px;
+    border-top: 1px solid rgba(26,26,26,0.12);
+    margin-top: 60px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <a class="back" href="index.html">← Back</a>
+  </header>
+
+  <div class="meta">CASE STUDY · OPERATIONS / SYSTEMS DESIGN</div>
+  <h1>Fixing production traceability at ChenMega</h1>
+
+  <h2>The problem</h2>
+  <p class="lead">Crate and serial numbers were handwritten in Sharpie, directly on bags of tags.</p>
+  <p>That sounds minor until you see what it actually caused. Handwriting was often hard to read. Sharpie ink rubs off with handling. And once a number faded or smudged, there was no way to confidently trace which serial number belonged to which crate.</p>
+  <p style="margin-top:16px;">The numbers also lived in an Excel sheet with no real structure behind it — no validation, no enforced uniqueness. Duplicate crate numbers and duplicate serial numbers showed up regularly, which is a real problem when those numbers are supposed to be unique identifiers.</p>
+
+  <div class="figure">
+    [ before / after label photo goes here ]
+  </div>
+
+  <h2>Why it mattered</h2>
+  <p>This wasn't just a paperwork annoyance. Duplicates broke the production report itself. A single crate could get logged as produced twice, inflating output numbers. Crates marked "shipped" were sometimes still sitting in the warehouse. Crates that were never produced at all could still land on the production report.</p>
+  <p style="margin-top:16px;">Because there was no reliable way to trace a crate back to its actual serial number, none of this could be caught or corrected after the fact — it just piled up as inventory noise that someone, eventually, had to untangle by hand.</p>
+
+  <h2>Why it was harder than "just build a spreadsheet"</h2>
+  <p>The numbering isn't simple sequential counting. Crate numbers increment by 1. Serial numbers increment by 9, with a skip rule: if the next serial's last two digits would land in an unusable range, the system has to jump to the next valid value instead.</p>
+  <p style="margin-top:16px;">Serial numbers can also reset mid-sequence at a specified crate, without disturbing any labels already generated earlier on the sheet. And lot prefixes — L vs. H — have to be applied exactly, since they're not interchangeable.</p>
+
+  <h2>What I built</h2>
+  <p>A rules-based label generation system, built in Python and Node.js, that generates printable label sheets directly from tracked state instead of anyone re-typing or hand-copying numbers.</p>
+  <p style="margin-top:16px;">The system encodes the actual rules instead of leaving them to memory: +1 per crate, +9 per serial, the skip logic for invalid ranges, mid-sequence resets, and exact lot-prefix handling. Because every number comes out of the system rather than being transcribed by hand, duplicates become structurally impossible. It also carries continuity across sessions, so starting a new sheet picks up automatically from the last crate and serial used on the previous one.</p>
+
+  <h2>The result</h2>
+  <p>Every label is now legible, permanent, and traceable back to a specific crate and serial number. The root cause of the mismatch between production reports, shipping records, and actual warehouse inventory is gone, because the system that generates the numbers can't produce a duplicate in the first place.</p>
+
+  <footer>
+    Linh Le · Houston, TX
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does Fragrance-Free Actually Rate Better? — Linh Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F6EDE8;
+    --ink: #1A1A1A;
+    --rose: #C4536B;
+    --sage: #8FB9A8;
+    --muted: #6B5F5A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.7;
+  }
+  a { color: var(--rose); text-decoration: none; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+  }
+  .logo { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; }
+  .back { font-size: 13px; color: var(--muted); }
+  .back:hover { color: var(--ink); }
+
+  .meta {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.25;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 46px 0 14px;
+  }
+  p { font-size: 15.5px; color: #3a3230; margin-bottom: 4px; }
+  .lead { font-size: 17px; color: var(--ink); }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 30px 0;
+  }
+  .stat {
+    background: #fff;
+    border: 1px solid rgba(26,26,26,0.1);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--rose);
+  }
+  .stat .label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .figure { margin: 30px 0; }
+  .figure img {
+    max-width: 100%;
+    border-radius: 8px;
+    display: block;
+    border: 1px solid rgba(26,26,26,0.12);
+  }
+  .figure .caption {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .callout {
+    background: #fff;
+    border-left: 3px solid var(--rose);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 15px;
+  }
+
+  pre {
+    background: #fff;
+    border: 1px solid rgba(26,26,26,0.12);
+    border-radius: 8px;
+    padding: 18px;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 500px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 20px 0;
+    white-space: pre;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    margin: 30px 0 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 11px 20px;
+    border-radius: 24px;
+  }
+  .btn-solid { background: var(--ink); color: var(--cream); }
+
+  footer {
+    padding: 60px 0 60px;
+    border-top: 1px solid rgba(26,26,26,0.12);
+    margin-top: 60px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <a class="back" href="index.html">← Back</a>
+  </header>
+
+  <div class="meta">DATA ANALYSIS · CONSUMER INSIGHTS / SKINCARE</div>
+  <h1>Does "Fragrance-Free" Actually Rate Better?</h1>
+
+  <h2>The question</h2>
+  <p class="lead">"Fragrance-free" is one of the most common clean-beauty claims on skincare packaging. Does it actually correlate with happier customers, or is it just a marketing checkbox people pay extra to avoid?</p>
+  <p style="margin-top:16px;">I analyzed 1,472 Sephora skincare products — moisturizers, cleansers, treatments, eye creams, sunscreens, and face masks — comparing products that list "fragrance" or "parfum" in their ingredients against those that don't, on both customer rating and price.</p>
+
+  <h2>The surprising part</h2>
+  <p>Fragranced products rate <em>higher</em>, not lower — and cost meaningfully more. Both differences are statistically significant, not noise.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">4.22 vs 4.12</div>
+      <div class="label">avg rating, fragranced vs. fragrance-free (p=0.006)</div>
+    </div>
+    <div class="stat">
+      <div class="num">$62.78 vs $51.81</div>
+      <div class="label">avg price, fragranced vs. fragrance-free (p&lt;0.001)</div>
+    </div>
+  </div>
+
+  <div class="figure">
+    <img src="chart_overall.jpg" alt="Bar chart comparing average rating and price between fragrance-free and fragranced products">
+  </div>
+
+  <p>So on the surface: going fragrance-free doesn't buy you a better-reviewed product — if anything, the opposite. But that's not the same as "fragrance-free doesn't matter." It just means the value of fragrance-free isn't rating-driven; it's about sensitivity, allergies, and personal preference, which this dataset doesn't measure directly.</p>
+
+  <h2>Where the story flips</h2>
+  <p>Averages hide category differences, so I broke it down by product type. Five of six categories follow the overall pattern — fragranced products rate slightly higher. <strong>Sun protection is the exception</strong>: fragrance-free sunscreens rate higher (4.09 vs. 3.96) <em>and</em> cost less than their fragranced counterparts.</p>
+
+  <div class="figure">
+    <img src="chart_by_category.jpg" alt="Grouped bar chart of average rating by product category, fragrance-free versus fragranced">
+  </div>
+
+  <div class="callout">
+    A plausible read: fragrance in sunscreen is more likely to trigger the exact irritation sunscreen is supposed to prevent, so shoppers actively reward the fragrance-free option here — the opposite incentive from something like a moisturizer or treatment, where scent is more purely a luxury signal.
+  </div>
+
+  <h2>What this actually tells a brand or shopper</h2>
+  <p>"Clean" or "fragrance-free" isn't a universal rating booster — it doesn't automatically mean better-reviewed. But it isn't a universal downgrade either. The right read depends on the category: for leave-on, irritation-prone products like sunscreen, fragrance-free is a genuine selling point backed by the data. For indulgence categories like moisturizers and treatments, fragrance is doing real work as part of the product experience, and cutting it doesn't obviously help.</p>
+
+  <h2>Method note</h2>
+  <p>A product was flagged "fragrance-free" if its ingredient list didn't mention "fragrance" or "parfum" — the standard labeling terms for added scent. This is a simple text-presence check, not a certified clean-beauty label, so a handful of scented products using only a named essential oil (without the word "fragrance") may be miscategorized. Good enough for a directional read, not a regulatory claim.</p>
+
+  <div class="cta-row">
+    <a class="btn btn-solid" href="https://github.com/klinhle2306/Portfolio/blob/main/fragrance_analysis.py" target="_blank">View analysis code on GitHub →</a>
+  </div>
+
+  <footer>
+    Linh Le · Houston, TX
+  </footer>
+</div>
+</body>
+</html>

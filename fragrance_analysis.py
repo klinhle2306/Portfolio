@@ -128,6 +128,27 @@ def category_breakdown(df: pd.DataFrame, min_group_size: int = 5) -> pd.DataFram
     return pd.DataFrame(rows)
 
 
+def plot_rank_distribution(df: pd.DataFrame, out_path: str = "chart_rank_distribution.png") -> None:
+    """
+    Histogram of the raw Rank column, run BEFORE cleaning, to visually
+    show why the 19 zero-rank products look like a data artifact rather
+    than genuine ratings: every other product falls between 3 and 5
+    stars, with a clear gap before the 0s.
+    """
+    fig, ax = plt.subplots(figsize=(9, 4.5))
+    ax.hist(df["Rank"], bins=[0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+            color="#8FB9A8", edgecolor="white")
+    ax.axvspan(-0.1, 0.5, color="#C4536B", alpha=0.25)
+    ax.text(0.15, ax.get_ylim()[1] * 0.9, "19 products\nat exactly 0", color="#C4536B",
+            fontsize=10, ha="left", fontweight="bold")
+    ax.set_xlabel("Rating (Rank)")
+    ax.set_ylabel("Number of products")
+    ax.set_title("Rating Distribution — Before Cleaning")
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=150)
+    plt.close()
+
+
 def plot_overall_comparison(summary: dict, out_path: str = "chart_overall.png") -> None:
     """Bar chart comparing average rating and price, fragrance-free vs. fragranced."""
     fig, axes = plt.subplots(1, 2, figsize=(9, 4))
@@ -176,6 +197,7 @@ if __name__ == "__main__":
 
     print("=== Data Exploration (before cleaning) ===")
     explore_data(raw_df)
+    plot_rank_distribution(raw_df)
 
     print("\n=== Cleaning ===")
     df = clean_data(raw_df)

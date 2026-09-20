@@ -27,12 +27,51 @@ DATA_PATH = "cosmetics.csv"
 
 
 def load_data(path: str = DATA_PATH) -> pd.DataFrame:
-    """Load the cosmetics dataset and add a fragrance_free flag column."""
+    """Load the raw cosmetics dataset and add a fragrance_free flag column."""
     df = pd.read_csv(path, encoding="utf-8-sig")
     df["fragrance_free"] = ~df["Ingredients"].str.contains(
         "fragrance|parfum", case=False, na=False
     )
     return df
+
+
+def explore_data(df: pd.DataFrame) -> None:
+    """
+    Print a basic data-quality pass: shape, missing values, duplicate
+    rows, and the distribution of the two numeric columns we care about
+    (Rank and Price). This is meant to run BEFORE any analysis, so any
+    issue it surfaces gets handled in clean_data() rather than silently
+    skewing the results.
+    """
+    print("Shape:", df.shape)
+    print("\nMissing values per column:")
+    print(df.isnull().sum())
+    print("\nFull duplicate rows:", df.duplicated().sum())
+    print("\nRank (rating) summary:")
+    print(df["Rank"].describe())
+    print("Products with Rank == 0:", (df["Rank"] == 0).sum())
+    print("\nPrice summary:")
+    print(df["Price"].describe())
+
+
+def clean_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Apply the cleaning decision found during exploration: drop products
+    with a Rank of exactly 0.
+
+    Why: ratings in this dataset run 1-5 stars. A small number of
+    products (19 of 1,472) show a Rank of 0, which lines up with
+    "not yet rated" rather than a genuine below-1-star score -- no
+    product actually has a worse rating than a 1-star product would.
+    Left in, these zeros would silently drag down average ratings for
+    whichever group they happened to fall into. There were no missing
+    values or full duplicate rows to handle otherwise.
+    """
+    before = len(df)
+    cleaned = df[df["Rank"] > 0].copy()
+    dropped = before - len(cleaned)
+    print(f"Dropped {dropped} rows with Rank == 0 ({before} -> {len(cleaned)})")
+    return cleaned
 
 
 def overall_comparison(df: pd.DataFrame) -> dict:
@@ -133,7 +172,13 @@ def plot_category_breakdown(cat_df: pd.DataFrame, out_path: str = "chart_by_cate
 
 
 if __name__ == "__main__":
-    df = load_data()
+    raw_df = load_data()
+
+    print("=== Data Exploration (before cleaning) ===")
+    explore_data(raw_df)
+
+    print("\n=== Cleaning ===")
+    df = clean_data(raw_df)
 
     summary = overall_comparison(df)
     print("=== Overall ===")

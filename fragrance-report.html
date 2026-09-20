@@ -156,16 +156,20 @@
   <p class="lead">"Fragrance-free" is one of the most common clean-beauty claims on skincare packaging. Does it actually correlate with happier customers, or is it just a marketing checkbox people pay extra to avoid?</p>
   <p style="margin-top:16px;">I analyzed 1,472 Sephora skincare products — moisturizers, cleansers, treatments, eye creams, sunscreens, and face masks — comparing products that list "fragrance" or "parfum" in their ingredients against those that don't, on both customer rating and price.</p>
 
+  <h2>Cleaning the data first</h2>
+  <p>Before comparing anything, I checked the raw data for issues that could quietly distort the results. The dataset had no missing values and no duplicate rows — but the rating column told a different story: <strong>19 of 1,472 products had a rating of exactly 0</strong>, on a scale that otherwise only runs from 1 to 5 stars.</p>
+  <p style="margin-top:16px;">A true 0 would mean "worse than a 1-star product," which isn't how this rating scale works — this almost certainly means "not yet rated," not "rated and hated." Left in, these zeros would silently drag down the average for whichever group they happened to land in, without reflecting any actual customer opinion. I dropped these 19 rows before running any comparison. The effect was small but directionally important: removing them widened the rating gap between groups and made the result more statistically significant, not less — a sign the zeros were noise, not signal.</p>
+
   <h2>The surprising part</h2>
   <p>Fragranced products rate <em>higher</em>, not lower — and cost meaningfully more. Both differences are statistically significant, not noise.</p>
 
   <div class="stats">
     <div class="stat">
-      <div class="num">4.22 vs 4.12</div>
-      <div class="label">avg rating, fragranced vs. fragrance-free (p=0.006)</div>
+      <div class="num">4.28 vs 4.17</div>
+      <div class="label">avg rating, fragranced vs. fragrance-free (p&lt;0.001)</div>
     </div>
     <div class="stat">
-      <div class="num">$62.78 vs $51.81</div>
+      <div class="num">$62.86 vs $51.55</div>
       <div class="label">avg price, fragranced vs. fragrance-free (p&lt;0.001)</div>
     </div>
   </div>
@@ -177,7 +181,7 @@
   <p>So on the surface: going fragrance-free doesn't buy you a better-reviewed product — if anything, the opposite. But that's not the same as "fragrance-free doesn't matter." It just means the value of fragrance-free isn't rating-driven; it's about sensitivity, allergies, and personal preference, which this dataset doesn't measure directly.</p>
 
   <h2>Where the story flips</h2>
-  <p>Averages hide category differences, so I broke it down by product type. Five of six categories follow the overall pattern — fragranced products rate slightly higher. <strong>Sun protection is the exception</strong>: fragrance-free sunscreens rate higher (4.09 vs. 3.96) <em>and</em> cost less than their fragranced counterparts.</p>
+  <p>Averages hide category differences, so I broke it down by product type. Five of six categories follow the overall pattern — fragranced products rate slightly higher. <strong>Sun protection is the exception</strong>: fragrance-free sunscreens rate higher (4.12 vs. 4.04) <em>and</em> cost less than their fragranced counterparts.</p>
 
   <div class="figure">
     <img src="chart_by_category.jpg" alt="Grouped bar chart of average rating by product category, fragrance-free versus fragranced">

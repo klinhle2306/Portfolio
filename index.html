@@ -84,42 +84,63 @@
     color: var(--muted-dark);
     margin-bottom: 30px;
   }
-  .project {
-    display: block;
-    border-top: 1px solid var(--ink-border);
-    padding: 28px 0;
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
-  .project:last-child { border-bottom: 1px solid var(--ink-border); }
-  .project-row {
+  .project {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 20px;
+    flex-direction: column;
+    background: var(--ink-2);
+    border: 1px solid var(--ink-border);
+    border-radius: 14px;
+    padding: 24px 22px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .project:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent, var(--rose));
+  }
+  .project .tag-chip {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 10.5px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    color: var(--accent, var(--rose));
+    background: color-mix(in srgb, var(--accent, var(--rose)) 16%, transparent);
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
   }
   .project h3 {
     font-family: 'Fraunces', serif;
     font-weight: 500;
-    font-size: 22px;
-  }
-  .project .meta {
-    font-size: 12px;
-    color: var(--muted-dark);
-    white-space: nowrap;
+    font-size: 19px;
+    line-height: 1.3;
+    margin-bottom: 10px;
   }
   .project p {
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--muted-dark);
-    max-width: 52ch;
-    margin-top: 10px;
+    flex-grow: 1;
+    margin-bottom: 14px;
+  }
+  .project .arrow {
+    font-size: 13px;
+    color: var(--accent, var(--rose));
+    font-weight: 500;
   }
   .project .status {
     display: inline-block;
     font-size: 11px;
-    color: var(--rose);
-    border: 1px solid var(--rose);
+    color: var(--accent, var(--rose));
+    border: 1px solid var(--accent, var(--rose));
     padding: 3px 10px;
     border-radius: 20px;
-    margin-top: 12px;
+    margin-top: 4px;
+    align-self: flex-start;
   }
 
   .connect {
@@ -173,6 +194,7 @@
 
   @media (max-width: 560px) {
     .links { grid-template-columns: 1fr; }
+    .project-grid { grid-template-columns: 1fr; }
     nav { display: none; }
   }
 </style>
@@ -199,37 +221,37 @@
   <div class="wrap">
     <div class="eyebrow">SELECTED WORK</div>
 
-    <a class="project" href="chenmega-case-study.html">
-      <div class="project-row">
-        <h3>Fixing production traceability at ChenMega</h3>
-        <span class="meta">Operations · Systems design</span>
-      </div>
+    <div class="project-grid">
+
+    <a class="project" style="--accent:#C4536B" href="chenmega-case-study.html">
+      <span class="tag-chip">Operations · Systems design</span>
+      <h3>Fixing production traceability at ChenMega</h3>
       <p>Manual, Sharpie-written crate labels were causing duplicate serial numbers and breaking production reports. Built a rules-based generation system that made duplicates structurally impossible.</p>
+      <span class="arrow">Read the case study →</span>
     </a>
 
-    <a class="project" href="fragrance-report.html">
-      <div class="project-row">
-        <h3>Does "fragrance-free" actually rate better?</h3>
-        <span class="meta">Consumer insights</span>
-      </div>
+    <a class="project" style="--accent:#8FB9A8" href="fragrance-report.html">
+      <span class="tag-chip">Consumer insights</span>
+      <h3>Does "fragrance-free" actually rate better?</h3>
       <p>Analyzed 1,472 skincare products to test whether a common clean-beauty claim actually predicts happier customers — or just a different price tag.</p>
+      <span class="arrow">Read the analysis →</span>
     </a>
 
-    <a class="project" href="asthma-research.html">
-      <div class="project-row">
-        <h3>Personalized asthma risk prediction on imbalanced data</h3>
-        <span class="meta">Published research · IEEE</span>
-      </div>
+    <a class="project" style="--accent:#D4A24C" href="asthma-research.html">
+      <span class="tag-chip">Published research · IEEE</span>
+      <h3>Personalized asthma risk prediction on imbalanced data</h3>
       <p>Evaluated and proposed new synthetic oversampling techniques to improve machine learning predictions on imbalanced healthcare data, published at IEEE ICCDA 2023.</p>
+      <span class="arrow">Read the paper →</span>
     </a>
 
-    <a class="project" href="https://github.com/klinhle2306/SQL-Portfolio" target="_blank">
-      <div class="project-row">
-        <h3>SQL portfolio: sales, Netflix, Spotify &amp; more</h3>
-        <span class="meta">SQL · GitHub</span>
-      </div>
+    <a class="project" style="--accent:#8E9AC4" href="https://github.com/klinhle2306/SQL-Portfolio" target="_blank">
+      <span class="tag-chip">SQL · GitHub</span>
+      <h3>SQL portfolio: sales, Netflix, Spotify &amp; more</h3>
       <p>Five SQL projects covering joins, aggregations, and messy real-world data cleanup — from Fortune 500 employee benefits to Spotify's top tracks.</p>
+      <span class="arrow">View on GitHub →</span>
     </a>
+
+    </div>
   </div>
 </section>
 

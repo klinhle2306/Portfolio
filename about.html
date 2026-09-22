@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Linh Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #E7E5E1;
+    --ink: #17161A;
+    --muted: #6B6A6E;
+    --accent: #A8785D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Work Sans', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.75;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+  }
+  .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; }
+  .back { font-size: 13px; color: var(--muted); transition: color 0.15s ease; }
+  .back:hover { color: var(--ink); }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(32px, 6vw, 46px);
+    letter-spacing: -1px;
+    margin-bottom: 36px;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: -0.2px;
+    margin: 40px 0 12px;
+  }
+  p { font-size: 16px; color: var(--muted); margin-bottom: 14px; }
+  .lead { font-size: 18px; color: var(--ink); }
+
+  .fact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 30px 0 10px;
+  }
+  .fact {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .fact .k {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .fact .v { font-size: 14px; color: var(--ink); }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    margin: 40px 0 20px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-solid { background: var(--accent); color: var(--ink); }
+  .btn-outline { border: 1px solid var(--border); color: var(--ink); }
+
+  footer {
+    padding: 60px 0 60px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 560px) {
+    .fact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <a class="back" href="index.html">← Back</a>
+  </header>
+
+  <h1>About</h1>
+
+  <p class="lead">I'm a content and insights analyst based in Houston, TX — though I got my start somewhere a lot less glamorous: warehouse logistics.</p>
+
+  <p>Most of my working life has been spent finding the pattern in messy, real-world data and turning it into something people actually use — whether that's fixing a manual labeling process that was quietly corrupting production reports, or digging through consumer reviews to test whether a marketing claim actually holds up. I like the part of analysis most people skip: checking whether the data can be trusted before deciding what it means.</p>
+
+  <p>I hold a B.S. in Computer Science (Math specialization, Data Science minor) from Seattle University, and I'm currently finishing an M.S. in Business Analytics there too. In between, I've worked across operations, systems analysis, and quality assurance — different titles, same underlying instinct: find what's actually true in the data, then explain it clearly to someone who needs to act on it.</p>
+
+  <h2>A few facts</h2>
+  <div class="fact-grid">
+    <div class="fact">
+      <div class="k">Based in</div>
+      <div class="v">Houston, TX</div>
+    </div>
+    <div class="fact">
+      <div class="k">Education</div>
+      <div class="v">M.S. Business Analytics (in progress), B.S. Computer Science — Seattle University</div>
+    </div>
+    <div class="fact">
+      <div class="k">Languages</div>
+      <div class="v">English &amp; Vietnamese (fluent), some French</div>
+    </div>
+    <div class="fact">
+      <div class="k">Tools</div>
+      <div class="v">SQL, Python, Tableau, Excel</div>
+    </div>
+  </div>
+
+  <h2>What I'm looking for</h2>
+  <p>Roles where data work is actually connected to a story, a product, or a brand — not just internal reporting nobody reads. I'm drawn to content, insights, and consumer-facing analytics work, especially at companies where the analysis directly shapes what gets made or communicated next.</p>
+
+  <div class="cta-row">
+    <a class="btn btn-solid" href="index.html#work">See my work →</a>
+    <a class="btn btn-outline" href="Linh_Le_Content_Analyst_Resume.pdf" target="_blank">Download resume</a>
+  </div>
+
+  <footer>
+    Linh Le · Houston, TX
+  </footer>
+</div>
+</body>
+</html>

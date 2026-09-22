@@ -6,120 +6,109 @@
 <title>Personalized Asthma Risk Prediction on Imbalanced Data — Linh Le</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #FAFAF8;
-    --card: #FFFFFF;
-    --border: #E7E5E1;
-    --ink: #17161A;
-    --muted: #6B6A6E;
-    --accent: #A8785D;
+    --wood: #311807;
+    --wood2: #431600;
+    --outline-tan: #bc9253;
+    --parchment: #FFEBCD;
+    --parchment2: #F0A082;
+    --gold: #FFD700;
+    --ink: #1F1308;
+    --green: #228B22;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { image-rendering: pixelated; }
   body {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
     color: var(--ink);
-    background: var(--paper);
-    line-height: 1.7;
+    background: var(--wood);
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 2px, transparent 2px, transparent 8px);
+    line-height: 1.4;
   }
-  a { color: var(--accent); text-decoration: none; }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+
+  h1, .logo { text-shadow: 2px 2px 0px #000; }
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 0;
+    padding: 26px 0;
   }
-  .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; }
-  .back { font-size: 13px; color: var(--muted); transition: color 0.15s ease; }
-  .back:hover { color: var(--ink); }
+  .logo { font-size: 26px; color: var(--gold); }
+  .back { font-size: 20px; color: var(--parchment); padding: 4px 10px; border: 2px solid transparent; }
+  .back:hover { color: var(--gold); border: 2px solid var(--gold); }
 
-  .meta {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.8px;
-    margin-bottom: 14px;
-    text-transform: uppercase;
+  .meta { font-size: 18px; color: var(--gold); text-shadow: 1px 1px 0 #000; margin-bottom: 8px; }
+  h1 { font-size: clamp(26px, 5.5vw, 40px); color: var(--parchment); line-height: 1.25; margin-bottom: 8px; }
+  .byline { font-size: 16px; color: var(--parchment2); margin-bottom: 24px; }
+
+  .panel {
+    background: var(--parchment);
+    border: 4px solid var(--wood);
+    outline: 4px solid var(--outline-tan);
+    outline-offset: -4px;
+    padding: 26px 28px;
+    position: relative;
+    margin-bottom: 28px;
   }
-  h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: clamp(26px, 5vw, 38px);
-    letter-spacing: -0.7px;
-    line-height: 1.25;
-    margin-bottom: 10px;
+  .panel::before, .panel::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border: 2px solid var(--wood);
   }
-  .byline {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 40px;
-  }
-  h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 21px;
-    letter-spacing: -0.3px;
-    margin: 46px 0 14px;
-  }
-  p { font-size: 15.5px; color: var(--muted); margin-bottom: 4px; }
-  .lead { font-size: 17px; color: var(--ink); }
-  ul { margin: 16px 0 0 20px; }
-  li { font-size: 15.5px; color: var(--muted); margin-bottom: 8px; }
-  li strong { color: var(--ink); }
+  .panel::before { top: -8px; left: -8px; }
+  .panel::after { bottom: -8px; right: -8px; }
+
+  h2 { font-size: 24px; color: var(--wood2); border-bottom: 2px solid var(--outline-tan); padding-bottom: 6px; margin: 28px 0 12px; }
+  h2:first-child { margin-top: 0; }
+  p { font-size: 20px; color: var(--ink); margin-bottom: 10px; }
+  .lead { font-size: 22px; font-weight: bold; }
+  ul { margin: 12px 0 0 22px; }
+  li { font-size: 20px; color: var(--ink); margin-bottom: 8px; }
+  li strong { color: var(--wood2); }
 
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    margin: 30px 0;
+    margin: 18px 0;
   }
   .stat {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
+    background: var(--parchment2);
+    border: 3px solid var(--wood);
+    box-shadow: inset 3px 3px 0 rgba(0,0,0,0.3), inset -3px -3px 0 rgba(255,255,255,0.2);
+    padding: 12px;
     text-align: center;
   }
-  .stat .num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 22px;
-    color: var(--accent);
-  }
-  .stat .label {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
+  .stat .num { font-size: 24px; color: var(--wood2); font-weight: bold; }
+  .stat .label { font-size: 14px; color: #6b5a44; margin-top: 4px; }
 
-  .cta-row {
-    display: flex;
-    gap: 12px;
-    margin: 40px 0 20px;
-    flex-wrap: wrap;
-  }
+  .cta-row { display: flex; gap: 14px; margin: 24px 0 10px; flex-wrap: wrap; }
   .btn {
     display: inline-block;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 12px 22px;
-    border-radius: 999px;
-    transition: transform 0.15s ease;
+    font-size: 22px;
+    color: var(--parchment);
+    background: var(--wood2);
+    padding: 10px 22px;
+    border: 4px solid var(--wood);
+    outline: 3px solid var(--outline-tan);
+    outline-offset: -3px;
+    transition: none;
   }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-solid { background: var(--accent); color: var(--ink); }
-  .btn-outline { border: 1px solid var(--border); color: var(--ink); }
+  .btn:hover { color: var(--ink); background: var(--gold); outline-color: #fff; }
+  .btn:active { transform: translate(2px, 2px); }
+  .btn-alt { background: var(--parchment2); color: var(--wood2); }
 
-  footer {
-    padding: 60px 0 60px;
-    border-top: 1px solid var(--border);
-    margin-top: 60px;
-    font-size: 12px;
-    color: var(--muted);
-  }
+  footer { padding: 30px 0 40px; text-align: center; font-size: 16px; color: var(--parchment2); }
+
+  @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -129,53 +118,53 @@
     <a class="back" href="index.html">← Back</a>
   </header>
 
-  <div class="meta">PUBLISHED RESEARCH · MACHINE LEARNING / HEALTHCARE DATA</div>
+  <div class="meta">▸ PUBLISHED RESEARCH · MACHINE LEARNING / HEALTHCARE DATA</div>
   <h1>Personalized Asthma Risk Prediction on Imbalanced Data</h1>
   <div class="byline">Angelo Alfonso, Linh Le, David Stanko · Mentored by Dr. Wan Bae · Seattle University, Dept. of Computer Science · Published, IEEE ICCDA 2023</div>
 
-  <h2>The problem</h2>
-  <p class="lead">Asthma risk datasets are small and lopsided — far more "low risk" records than "high risk" ones.</p>
-  <p>That imbalance quietly sabotages machine learning models. A model can score well on paper while barely ever catching the high-risk cases that actually matter, because it learns to just predict the majority class most of the time. The usual fix is generating synthetic samples of the minority class (SMOTE and its variants), but how well those techniques actually work hadn't been carefully compared against each other on real patient data.</p>
+  <div class="panel">
+    <h2 style="margin-top:0;">THE PROBLEM</h2>
+    <p class="lead">Asthma risk datasets are small and lopsided — far more "low risk" records than "high risk" ones.</p>
+    <p>That imbalance quietly sabotages machine learning models. A model can score well on paper while barely ever catching the high-risk cases that actually matter, because it learns to just predict the majority class most of the time. The usual fix is generating synthetic samples of the minority class (SMOTE and its variants), but how well those techniques actually work hadn't been carefully compared against each other on real patient data.</p>
 
-  <h2>What we did</h2>
-  <p>We evaluated five existing SMOTE-style oversampling techniques and proposed three new ones, testing all of them across 24 real asthma patient datasets from Soonchunhyang University Bucheon Hospital, South Korea.</p>
-  <ul>
-    <li><strong>Average Neighbor Vector Oversampling (ANVO):</strong> generates new data points from the average difference between a minority point and its nearest neighbors.</li>
-    <li><strong>Incremental K-Means Clustering (IKC):</strong> clusters the minority class and generates new points from cluster averages, increasing cluster count each iteration for more diversity.</li>
-    <li><strong>SMOTEBoost / SMOTEBoostCC:</strong> adds a boosting step to standard SMOTE, testing multiple synthetic batches per iteration and keeping only the one that improves sensitivity most.</li>
-  </ul>
+    <h2>WHAT WE DID</h2>
+    <p>We evaluated five existing SMOTE-style oversampling techniques and proposed three new ones, testing all of them across 24 real asthma patient datasets from Soonchunhyang University Bucheon Hospital, South Korea.</p>
+    <ul>
+      <li><strong>Average Neighbor Vector Oversampling (ANVO):</strong> generates new data points from the average difference between a minority point and its nearest neighbors.</li>
+      <li><strong>Incremental K-Means Clustering (IKC):</strong> clusters the minority class and generates new points from cluster averages, increasing cluster count each iteration for more diversity.</li>
+      <li><strong>SMOTEBoost / SMOTEBoostCC:</strong> adds a boosting step to standard SMOTE, testing multiple synthetic batches per iteration and keeping only the one that improves sensitivity most.</li>
+    </ul>
 
-  <h2>Results</h2>
-  <p>We tested every method across four classifiers (Decision Tree, Logistic Regression, k-Nearest Neighbors, Naïve Bayes) plus a transfer learning framework, measuring weighted accuracy, sensitivity, precision, F1, and specificity.</p>
+    <h2>RESULTS</h2>
+    <p>We tested every method across four classifiers (Decision Tree, Logistic Regression, k-Nearest Neighbors, Naïve Bayes) plus a transfer learning framework, measuring weighted accuracy, sensitivity, precision, F1, and specificity.</p>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="num">24</div>
-      <div class="label">patient datasets tested</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">24</div>
+        <div class="label">patient datasets tested</div>
+      </div>
+      <div class="stat">
+        <div class="num">+25%</div>
+        <div class="label">predictive accuracy gain, best method</div>
+      </div>
+      <div class="stat">
+        <div class="num">8</div>
+        <div class="label">oversampling methods compared</div>
+      </div>
     </div>
-    <div class="stat">
-      <div class="num">+25%</div>
-      <div class="label">predictive accuracy gain, best method</div>
-    </div>
-    <div class="stat">
-      <div class="num">8</div>
-      <div class="label">oversampling methods compared</div>
+
+    <p>SMOTEBoostCC, one of our proposed methods, came out on top overall — highest weighted accuracy (0.645) and sensitivity (0.545) among every method tested, meaningfully ahead of the untouched original data and standard SMOTE. The proposed methods held their own against established techniques, which was the core question we set out to answer.</p>
+
+    <h2>WHY IT MATTERED TO ME</h2>
+    <p>This was my first real experience with the gap between "a model that scores well" and "a model that's actually useful" — in healthcare specifically, missing a high-risk case is a much bigger problem than a false alarm, so optimizing for the wrong metric has real consequences. It's also where I first got comfortable presenting technical findings to people who weren't in the room for the math, which turned out to matter far more in my career since than the SMOTE variants themselves.</p>
+
+    <div class="cta-row">
+      <a class="btn" href="https://ieeexplore.ieee.org/document/10314855" target="_blank">Read the published paper →</a>
+      <a class="btn btn-alt" href="Asthma_Research_Poster.pdf" target="_blank">View research poster</a>
     </div>
   </div>
 
-  <p>SMOTEBoostCC, one of our proposed methods, came out on top overall — highest weighted accuracy (0.645) and sensitivity (0.545) among every method tested, meaningfully ahead of the untouched original data and standard SMOTE. The proposed methods held their own against established techniques, which was the core question we set out to answer.</p>
-
-  <h2>Why it mattered to me</h2>
-  <p>This was my first real experience with the gap between "a model that scores well" and "a model that's actually useful" — in healthcare specifically, missing a high-risk case is a much bigger problem than a false alarm, so optimizing for the wrong metric has real consequences. It's also where I first got comfortable presenting technical findings to people who weren't in the room for the math, which turned out to matter far more in my career since than the SMOTE variants themselves.</p>
-
-  <div class="cta-row">
-    <a class="btn btn-solid" href="https://ieeexplore.ieee.org/document/10314855" target="_blank">Read the published paper →</a>
-    <a class="btn btn-outline" href="Asthma_Research_Poster.pdf" target="_blank">View research poster</a>
-  </div>
-
-  <footer>
-    Linh Le · Houston, TX
-  </footer>
+  <footer>Linh Le · Houston, TX</footer>
 </div>
 </body>
 </html>

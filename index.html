@@ -6,343 +6,381 @@
 <title>Linh Le — Content & Insights Analyst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #FAFAF8;
-    --ink: #17161A;
-    --muted: #6B6A6E;
-    --border: #E7E5E1;
-    --accent: #A8785D;
-    --hero-bg: #201E1C;
-    --hero-ink: #F5F1EC;
+    --wood: #311807;
+    --wood2: #431600;
+    --outline-tan: #bc9253;
+    --parchment: #FFEBCD;
+    --parchment2: #F0A082;
+    --gold: #FFD700;
+    --ink: #1F1308;
+    --green: #228B22;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    * { transition: none !important; animation: none !important; }
+    * { animation: none !important; }
   }
   body {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
     color: var(--ink);
-    background: var(--paper);
-    line-height: 1.6;
+    background: var(--wood);
+    background-image:
+      repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 2px, transparent 2px, transparent 8px);
+    line-height: 1.35;
   }
+  img { image-rendering: pixelated; }
   a { color: inherit; text-decoration: none; }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
-  .hero {
-    background: var(--hero-bg);
-    color: var(--hero-ink);
-    position: relative;
-    overflow: hidden;
+  h1, h2, h3, .pixel-btn, nav a, .logo, .nameplate {
+    text-shadow: 2px 2px 0px #000;
   }
-  .hero-pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.14;
-    pointer-events: none;
+
+  /* double-layer wood-and-stone frame, per spec */
+  .panel {
+    background: var(--parchment);
+    border: 4px solid var(--wood);
+    outline: 4px solid var(--outline-tan);
+    outline-offset: -4px;
+    padding: 22px 24px;
   }
+
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 0;
-    position: relative;
-    z-index: 1;
+    padding: 20px 0;
   }
-  .logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: -0.2px;
+  .logo { font-size: 30px; color: var(--gold); }
+  nav { display: flex; }
+  nav a {
+    margin-left: 22px;
+    font-size: 22px;
+    color: var(--parchment);
+    padding: 4px 10px;
+    border: 2px solid transparent;
   }
-  nav { display: flex; align-items: center; font-size: 13px; }
-  nav a { margin-left: 24px; opacity: 0.9; transition: opacity 0.15s ease; }
-  nav a:hover { opacity: 1; }
-  nav .resume-btn {
-    border: 1px solid rgba(245,241,236,0.35);
-    padding: 7px 16px;
-    border-radius: 999px;
-    font-weight: 600;
-  }
-  nav .resume-btn:hover { background: rgba(245,241,236,0.1); }
+  nav a:hover { color: var(--gold); border: 2px solid var(--gold); }
 
-  .hero-body {
-    padding: 70px 0 90px;
-    position: relative;
-    z-index: 1;
-  }
-  .hero .eyebrow {
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 1.6px;
-    color: var(--accent);
-    opacity: 1;
-    margin-bottom: 20px;
-  }
+  .hero { padding: 20px 0 50px; }
+  .hero .eyebrow { font-size: 20px; color: var(--gold); margin-bottom: 10px; letter-spacing: 1px; }
   .hero h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: clamp(40px, 6.5vw, 66px);
-    line-height: 1.04;
-    letter-spacing: -1.5px;
-    max-width: 14ch;
-    margin-bottom: 20px;
+    font-size: clamp(34px, 6vw, 54px);
+    color: var(--parchment);
+    line-height: 1.15;
+    margin-bottom: 10px;
   }
-  .hero .tag {
-    font-size: 17px;
-    font-weight: 500;
-    opacity: 0.92;
-    margin-bottom: 36px;
-  }
-  .btn {
-    display: inline-block;
-    font-size: 13.5px;
-    font-weight: 600;
-    background: var(--hero-ink);
-    color: var(--ink);
-    padding: 13px 26px;
-    border-radius: 999px;
-    transition: transform 0.15s ease;
-  }
-  .btn:hover { transform: translateY(-2px); }
-  .btn:active { transform: translateY(0) scale(0.98); }
+  .hero .tag { font-size: 22px; color: var(--parchment2); margin-bottom: 26px; }
 
-  .work {
-    padding: 80px 0 90px;
+  .btn-wrap { position: relative; display: inline-block; }
+  .pixel-btn {
+    display: inline-block;
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+    color: var(--parchment);
+    background: var(--wood2);
+    padding: 10px 26px;
+    border: 4px solid var(--wood);
+    outline: 3px solid var(--outline-tan);
+    outline-offset: -3px;
+    transition: none;
   }
-  .work .eyebrow {
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 1.6px;
-    color: var(--accent);
-    margin-bottom: 30px;
+  .pixel-btn:hover {
+    color: var(--ink);
+    background: var(--gold);
+    outline-color: #fff;
   }
-  .project-grid {
+  .pixel-btn:active { transform: translate(2px, 2px); }
+
+  .napping-kitten {
+    position: absolute;
+    top: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 48px;
+    pointer-events: none;
+  }
+  .zzz {
+    position: absolute;
+    top: -28px;
+    left: 62%;
+    font-size: 18px;
+    color: var(--gold);
+    text-shadow: 1px 1px 0 #000;
+    opacity: 0;
+    animation: floatZ 3s ease-in infinite;
+  }
+  .zzz.z2 { animation-delay: 1s; left: 74%; font-size: 14px; }
+  @keyframes floatZ {
+    0% { opacity: 0; transform: translateY(0); }
+    20% { opacity: 0.9; }
+    80% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-16px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .zzz { animation: none; opacity: 0.6; }
+  }
+
+  /* ABOUT: villager dialogue box */
+  .dialogue-section { padding: 10px 0 50px; }
+  .dialogue-box {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    grid-template-columns: 110px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    position: relative;
   }
-  .project {
+  .dialogue-box::before, .dialogue-box::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border: 2px solid var(--wood);
+  }
+  .dialogue-box::before { top: -8px; left: -8px; }
+  .dialogue-box::after { bottom: -8px; right: -8px; }
+  .portrait {
+    width: 96px;
+    height: 96px;
+    background: var(--wood2);
+    border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan);
+    outline-offset: -2px;
     display: flex;
-    flex-direction: column;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 26px 24px;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    align-items: center;
+    justify-content: center;
   }
-  .project:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(23,22,26,0.07);
-  }
-  .project .tag-label {
+  .portrait img { width: 64px; height: 51px; }
+  .dialogue-text .nameplate {
     display: inline-block;
-    align-self: flex-start;
-    font-size: 11px;
-    letter-spacing: 0.4px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 16px;
-    text-transform: uppercase;
+    background: var(--wood);
+    color: var(--gold);
+    font-size: 20px;
+    padding: 2px 12px;
+    margin-bottom: 8px;
   }
-  .project h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 19px;
-    line-height: 1.3;
-    letter-spacing: -0.3px;
-    margin-bottom: 10px;
+  .dialogue-text p { font-size: 20px; color: var(--ink); max-width: 60ch; }
+  .dialogue-more {
+    font-size: 20px;
+    color: var(--wood2);
+    white-space: nowrap;
+    padding: 8px 16px;
+    background: var(--parchment2);
+    border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan);
+    outline-offset: -2px;
   }
-  .project p {
-    font-size: 13.5px;
-    color: var(--muted);
-    flex-grow: 1;
-    margin-bottom: 16px;
-  }
-  .project .arrow {
-    font-size: 13px;
-    color: var(--ink);
-    font-weight: 600;
-  }
-  .project .status {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 4px 12px;
-    border-radius: 999px;
-    margin-top: 4px;
-    align-self: flex-start;
-  }
+  .dialogue-more:hover { background: var(--gold); }
 
-  .connect {
-    background: #fff;
-    border-top: 1px solid var(--border);
-    padding: 84px 0 0;
-  }
-  .connect h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 30px;
-    letter-spacing: -0.6px;
-    margin-bottom: 10px;
-  }
-  .connect p.lead {
-    color: var(--muted);
-    font-size: 14.5px;
-    margin-bottom: 36px;
-    max-width: 40ch;
-  }
-  .links {
+  /* WORK: inventory grid */
+  .work { padding: 10px 0 60px; }
+  .work .eyebrow { font-size: 22px; color: var(--gold); text-shadow: 2px 2px 0 #000; margin-bottom: 18px; }
+  .inventory-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
   }
-  .link-card {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 18px;
+  .slot {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    min-height: 110px;
+    background: var(--parchment2);
+    border: 3px solid var(--wood);
+    box-shadow:
+      inset 3px 3px 0 rgba(0,0,0,0.35),
+      inset -3px -3px 0 rgba(255,255,255,0.25);
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    transition: border-color 0.15s ease, transform 0.15s ease;
+    align-items: center;
+    justify-content: center;
+    transition: none;
   }
-  .link-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
+  .slot:hover {
+    border-color: var(--gold);
+    outline: 2px solid var(--gold);
   }
-  .link-card .label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 14.5px;
+  .slot img { width: 56%; height: 56%; }
+  .slot-label {
+    grid-column: span 1;
+    font-size: 15px;
+    color: var(--parchment);
+    text-align: center;
+    margin-top: 6px;
+    line-height: 1.25;
   }
-  .link-card .sub {
-    font-size: 12px;
-    color: var(--muted);
+  .slot-wrap { display: flex; flex-direction: column; }
+
+  .work-note {
+    margin-top: 18px;
+    font-size: 18px;
+    color: var(--parchment2);
   }
 
+  /* CONNECT: shipping bin */
+  .connect { padding: 10px 0 50px; }
+  .connect h2 { font-size: 30px; color: var(--parchment); margin-bottom: 6px; }
+  .connect p.lead { font-size: 20px; color: var(--parchment2); margin-bottom: 20px; }
+  .ship-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .ship-slot {
+    background: var(--parchment2);
+    border: 3px solid var(--wood);
+    box-shadow: inset 3px 3px 0 rgba(0,0,0,0.3), inset -3px -3px 0 rgba(255,255,255,0.2);
+    padding: 16px;
+    text-align: center;
+  }
+  .ship-slot:hover { border-color: var(--gold); outline: 2px solid var(--gold); }
+  .ship-slot .label { font-size: 22px; color: var(--wood2); }
+  .ship-slot .sub { font-size: 16px; color: #6b5a44; }
+
   footer {
-    padding: 28px 0 46px;
-    margin-top: 46px;
-    font-size: 12px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
+    padding: 20px 0 30px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--parchment2);
+  }
+
+  .kitten-strip {
+    position: relative;
+    height: 56px;
+    overflow: hidden;
+    background: var(--wood2);
+    border-top: 4px solid var(--wood);
+  }
+  .walking-kitten {
+    position: absolute;
+    bottom: 6px;
+    width: 48px;
+    height: 32px;
+    animation: walkAcross linear infinite;
+  }
+  .walking-kitten.k1 { animation-duration: 16s; animation-delay: 0s; }
+  .walking-kitten.k2 { animation-duration: 20s; animation-delay: 5s; }
+  .walking-kitten.k3 { animation-duration: 24s; animation-delay: 11s; }
+  @keyframes walkAcross {
+    0% { left: -50px; }
+    100% { left: calc(100% + 10px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .walking-kitten { animation: none; left: 30%; }
   }
 
   @media (max-width: 720px) {
-    .links { grid-template-columns: 1fr; }
-    .project-grid { grid-template-columns: 1fr; }
-    nav a:not(.resume-btn) { display: none; }
+    .inventory-grid { grid-template-columns: repeat(2, 1fr); }
+    .ship-grid { grid-template-columns: 1fr; }
+    .dialogue-box { grid-template-columns: 80px 1fr; }
+    .dialogue-more { grid-column: 1 / -1; justify-self: start; margin-top: 10px; }
   }
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <svg class="hero-pattern" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <g stroke="#F5F1EC" stroke-width="1" fill="none">
-      <polyline points="20,420 90,380 160,400 230,340 300,360 370,290 440,310 510,240 580,260 650,190 720,210" />
-      <polyline points="20,470 90,455 160,460 230,430 300,440 370,410 440,415 510,385 580,390 650,360 720,365" />
-    </g>
-    <g fill="#F5F1EC">
-      <circle cx="90" cy="380" r="4"/>
-      <circle cx="230" cy="340" r="4"/>
-      <circle cx="370" cy="290" r="4"/>
-      <circle cx="510" cy="240" r="4"/>
-      <circle cx="650" cy="190" r="4"/>
-      <circle cx="720" cy="210" r="4"/>
-    </g>
-    <g fill="#F5F1EC" opacity="0.6">
-      <rect x="600" y="60" width="16" height="60"/>
-      <rect x="626" y="90" width="16" height="30"/>
-      <rect x="652" y="40" width="16" height="80"/>
-      <rect x="678" y="70" width="16" height="50"/>
-    </g>
-  </svg>
-  <div class="wrap">
-    <header>
-      <div class="logo">LINH LE</div>
-      <nav>
-        <a href="about.html">About</a>
-        <a href="#work">Work</a>
-        <a href="#connect">Connect</a>
-        <a class="resume-btn" href="Linh_Le_Content_Analyst_Resume.pdf" target="_blank">RESUME</a>
-      </nav>
-    </header>
-    <div class="hero-body">
-      <div class="eyebrow">CONTENT &amp; INSIGHTS ANALYST</div>
-      <h1>Data, with a point of view.</h1>
-      <div class="tag">pov: your analyst has a personality</div>
-      <a href="#work" class="btn">See the work →</a>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="#work">Inventory</a>
+      <a href="#connect">Shipping</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">✦ CONTENT &amp; INSIGHTS ANALYST ✦</div>
+    <h1>Data, with a point of view.</h1>
+    <div class="tag">pov: your analyst has a personality</div>
+    <span class="btn-wrap">
+      <a href="#work" class="pixel-btn">See the work →</a>
+      <img class="napping-kitten" src="pixel-cat-nap.png" alt="A small pixel-art cat napping on the button">
+      <span class="zzz">z</span>
+      <span class="zzz z2">z</span>
+    </span>
+  </section>
+
+  <section class="dialogue-section">
+    <div class="panel dialogue-box">
+      <div class="portrait">
+        <img src="pixel-cat-nap.png" alt="Linh's portrait">
+      </div>
+      <div class="dialogue-text">
+        <div class="nameplate">Linh</div>
+        <p>I got my start in warehouse logistics, not data. Now I spend my time finding the pattern in messy, real-world data and turning it into something people actually use.</p>
+      </div>
+      <a class="dialogue-more" href="about.html">Read more →</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="work" id="work">
-  <div class="wrap">
-    <div class="eyebrow">SELECTED WORK</div>
+  <section class="work" id="work">
+    <div class="eyebrow">▸ INVENTORY: SELECTED WORK</div>
 
-    <div class="project-grid">
+    <div class="inventory-grid">
 
-    <a class="project" href="chenmega-case-study.html">
-      <span class="tag-label">Operations · Systems design</span>
-      <h3>Fixing production traceability at ChenMega</h3>
-      <p>Manual, Sharpie-written crate labels were causing duplicate serial numbers and breaking production reports. Built a rules-based generation system that made duplicates structurally impossible.</p>
-      <span class="arrow">Read the case study →</span>
-    </a>
+      <div class="slot-wrap">
+        <a class="slot" href="chenmega-case-study.html" title="Fixing production traceability at ChenMega">
+          <img src="icon-crate.png" alt="Crate icon">
+        </a>
+        <div class="slot-label">Production<br>Traceability</div>
+      </div>
 
-    <a class="project" href="fragrance-report.html">
-      <span class="tag-label">Consumer insights</span>
-      <h3>Does "fragrance-free" actually rate better?</h3>
-      <p>Analyzed 1,472 skincare products to test whether a common clean-beauty claim actually predicts happier customers — or just a different price tag.</p>
-      <span class="arrow">Read the analysis →</span>
-    </a>
+      <div class="slot-wrap">
+        <a class="slot" href="fragrance-report.html" title="Does fragrance-free actually rate better?">
+          <img src="icon-potion.png" alt="Potion icon">
+        </a>
+        <div class="slot-label">Fragrance-Free<br>Report</div>
+      </div>
 
-    <a class="project" href="asthma-research.html">
-      <span class="tag-label">Published research · IEEE</span>
-      <h3>Personalized asthma risk prediction on imbalanced data</h3>
-      <p>Evaluated and proposed new synthetic oversampling techniques to improve machine learning predictions on imbalanced healthcare data, published at IEEE ICCDA 2023.</p>
-      <span class="arrow">Read the paper →</span>
-    </a>
+      <div class="slot-wrap">
+        <a class="slot" href="asthma-research.html" title="Personalized asthma risk prediction, published IEEE">
+          <img src="icon-book.png" alt="Book icon">
+        </a>
+        <div class="slot-label">Asthma Risk<br>Research (IEEE)</div>
+      </div>
 
-    <a class="project" href="https://github.com/klinhle2306/SQL-Portfolio" target="_blank">
-      <span class="tag-label">SQL · GitHub</span>
-      <h3>SQL portfolio: sales, Netflix, Spotify &amp; more</h3>
-      <p>Five SQL projects covering joins, aggregations, and messy real-world data cleanup — from Fortune 500 employee benefits to Spotify's top tracks.</p>
-      <span class="arrow">View on GitHub →</span>
-    </a>
+      <div class="slot-wrap">
+        <a class="slot" href="https://github.com/klinhle2306/SQL-Portfolio" target="_blank" title="SQL portfolio: sales, Netflix, Spotify & more">
+          <img src="icon-gem.png" alt="Gem icon">
+        </a>
+        <div class="slot-label">SQL<br>Portfolio</div>
+      </div>
 
     </div>
-  </div>
-</section>
+    <div class="work-note">Hover a slot for details · click to open</div>
+  </section>
 
-<section class="connect" id="connect">
-  <div class="wrap">
+  <section class="connect" id="connect">
     <h2>Let's talk</h2>
-    <p class="lead">Resume, LinkedIn, and code, all in one place.</p>
-    <div class="links">
-      <a class="link-card" href="Linh_Le_Content_Analyst_Resume.pdf" target="_blank">
-        <span class="label">Resume</span>
-        <span class="sub">Download PDF</span>
+    <p class="lead">Resume, LinkedIn, and code — drop it in the shipping bin.</p>
+    <div class="ship-grid">
+      <a class="ship-slot" href="Linh_Le_Content_Analyst_Resume.pdf" target="_blank">
+        <div class="label">Resume</div>
+        <div class="sub">Download PDF</div>
       </a>
-      <a class="link-card" href="https://linkedin.com/in/linh-le-ngoc-khanh" target="_blank">
-        <span class="label">LinkedIn</span>
-        <span class="sub">Connect with me</span>
+      <a class="ship-slot" href="https://linkedin.com/in/linh-le-ngoc-khanh" target="_blank">
+        <div class="label">LinkedIn</div>
+        <div class="sub">Connect with me</div>
       </a>
-      <a class="link-card" href="https://github.com/klinhle2306" target="_blank">
-        <span class="label">GitHub</span>
-        <span class="sub">See the code</span>
+      <a class="ship-slot" href="https://github.com/klinhle2306" target="_blank">
+        <div class="label">GitHub</div>
+        <div class="sub">See the code</div>
       </a>
     </div>
-    <footer>
-      Linh Le · Houston, TX
-    </footer>
-  </div>
-</section>
+    <footer>Linh Le · Houston, TX</footer>
+  </section>
+</div>
+
+<div class="kitten-strip">
+  <img class="walking-kitten k1" src="pixel-cat-walk.png" alt="">
+  <img class="walking-kitten k2" src="pixel-cat-walk.png" alt="">
+  <img class="walking-kitten k3" src="pixel-cat-walk.png" alt="">
+</div>
 
 </body>
 </html>

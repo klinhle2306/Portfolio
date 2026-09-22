@@ -66,6 +66,12 @@
     border: 2px solid transparent;
   }
   nav a:hover { color: var(--gold); border: 2px solid var(--gold); }
+  .profile-pic {
+    width: 44px;
+    height: 44px;
+    margin-left: 22px;
+    image-rendering: auto;
+  }
 
   .hero { padding: 20px 0 50px; }
   .hero .eyebrow { font-size: 20px; color: var(--gold); margin-bottom: 10px; letter-spacing: 1px; }
@@ -259,21 +265,35 @@
   }
   .walking-kitten {
     position: absolute;
-    bottom: 6px;
-    width: 48px;
-    height: 32px;
-    transform: scaleX(-1);
+    bottom: 4px;
+    width: 63px;
+    height: 57px;
+    overflow: hidden;
     animation: walkAcross linear infinite;
+  }
+  .walking-kitten .frame {
+    width: 63px;
+    height: 57px;
+    background-image: url('cat-walk-sheet.png');
+    background-size: 252px 57px;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    animation: walkCycle 0.5s steps(4) infinite;
+  }
+  @keyframes walkCycle {
+    from { background-position-x: 0px; }
+    to { background-position-x: -252px; }
   }
   .walking-kitten.k1 { animation-duration: 16s; animation-delay: 0s; }
   .walking-kitten.k2 { animation-duration: 20s; animation-delay: 5s; }
   .walking-kitten.k3 { animation-duration: 24s; animation-delay: 11s; }
   @keyframes walkAcross {
-    0% { left: -50px; }
+    0% { left: -70px; }
     100% { left: calc(100% + 10px); }
   }
   @media (prefers-reduced-motion: reduce) {
     .walking-kitten { animation: none; left: 30%; }
+    .walking-kitten .frame { animation: none; }
   }
 
   @media (max-width: 720px) {
@@ -288,11 +308,12 @@
 
 <div class="wrap">
   <header>
-    <div class="logo">Lê Ngọc Khánh Linh</div>
+    <div class="logo">linh le</div>
     <nav>
       <a href="about.html">About</a>
       <a href="#work">Inventory</a>
-      <a href="#connect">Contacts</a>
+      <a href="#connect">Shipping</a>
+      <img class="profile-pic" src="profile-photo.png" alt="Linh's profile photo">
     </nav>
   </header>
 
@@ -361,7 +382,7 @@
 
   <section class="connect" id="connect">
     <h2>Let's talk</h2>
-    <p class="lead">Resume, LinkedIn, and code.</p>
+    <p class="lead">Resume, LinkedIn, and code — drop it in the shipping bin.</p>
     <div class="ship-grid">
       <a class="ship-slot" href="Linh_Le_Content_Analyst_Resume.pdf" target="_blank">
         <div class="label">Resume</div>
@@ -376,14 +397,14 @@
         <div class="sub">See the code</div>
       </a>
     </div>
-    <footer>Linh Le · Houston, TX · Seattle, WA</footer>
+    <footer>Linh Le · Houston, TX</footer>
   </section>
 </div>
 
 <div class="kitten-strip">
-  <img class="walking-kitten k1" src="pixel-cat-walk.png" alt="">
-  <img class="walking-kitten k2" src="pixel-cat-walk.png" alt="">
-  <img class="walking-kitten k3" src="pixel-cat-walk.png" alt="">
+  <div class="walking-kitten k1"><div class="frame"></div></div>
+  <div class="walking-kitten k2"><div class="frame"></div></div>
+  <div class="walking-kitten k3"><div class="frame"></div></div>
 </div>
 
 </body>

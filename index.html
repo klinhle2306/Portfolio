@@ -66,14 +66,24 @@
     border: 2px solid transparent;
   }
   nav a:hover { color: var(--gold); border: 2px solid var(--gold); }
-  .profile-pic {
-    width: 44px;
-    height: 44px;
-    margin-left: 22px;
-    image-rendering: auto;
-  }
 
   .hero { padding: 20px 0 50px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+  .hero-photo {
+    justify-self: center;
+    width: 220px;
+    height: 220px;
+    image-rendering: auto;
+  }
+  @media (max-width: 720px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-photo { width: 150px; height: 150px; order: -1; }
+  }
   .hero .eyebrow { font-size: 20px; color: var(--gold); margin-bottom: 10px; letter-spacing: 1px; }
   .hero h1 {
     font-size: clamp(34px, 6vw, 54px);
@@ -258,14 +268,14 @@
 
   .kitten-strip {
     position: relative;
-    height: 56px;
+    height: 76px;
     overflow: hidden;
     background: var(--wood2);
     border-top: 4px solid var(--wood);
   }
   .walking-kitten {
     position: absolute;
-    bottom: 4px;
+    bottom: 10px;
     width: 63px;
     height: 57px;
     overflow: hidden;
@@ -313,20 +323,24 @@
       <a href="about.html">About</a>
       <a href="#work">Inventory</a>
       <a href="#connect">Shipping</a>
-      <img class="profile-pic" src="profile-photo.png" alt="Linh's profile photo">
     </nav>
   </header>
 
   <section class="hero">
-    <div class="eyebrow">✦ CONTENT &amp; INSIGHTS ANALYST ✦</div>
-    <h1>Data, with a point of view.</h1>
-    <div class="tag">pov: your analyst has a personality</div>
-    <span class="btn-wrap">
-      <a href="#work" class="pixel-btn">See the work →</a>
-      <img class="napping-kitten" src="pixel-cat-nap.png" alt="A small pixel-art cat napping on the button">
-      <span class="zzz">z</span>
-      <span class="zzz z2">z</span>
-    </span>
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">✦ CONTENT &amp; INSIGHTS ANALYST ✦</div>
+        <h1>Data, with a point of view.</h1>
+        <div class="tag">pov: your analyst has a personality</div>
+        <span class="btn-wrap">
+          <a href="#work" class="pixel-btn">See the work →</a>
+          <img class="napping-kitten" src="pixel-cat-nap.png" alt="A small pixel-art cat napping on the button">
+          <span class="zzz">z</span>
+          <span class="zzz z2">z</span>
+        </span>
+      </div>
+      <img class="hero-photo" src="profile-photo.png" alt="Linh's profile photo">
+    </div>
   </section>
 
   <section class="dialogue-section">

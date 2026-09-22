@@ -6,23 +6,25 @@
 <title>Fixing production traceability at ChenMega — Linh Le</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:ital,opsz,wght@0,12..96,400..800;1,12..96,400..800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F6EDE8;
-    --ink: #1A1A1A;
-    --rose: #C4536B;
-    --muted: #6B5F5A;
+    --bg: #0E0E10;
+    --bg-2: #1D1C20;
+    --border: #2C2B30;
+    --ink: #F3F1ED;
+    --muted: #9C9893;
+    --accent: #FF4D80;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Manrope', sans-serif;
     color: var(--ink);
-    background: var(--cream);
+    background: var(--bg);
     line-height: 1.7;
   }
-  a { color: var(--rose); text-decoration: none; }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
 
   header {
     display: flex;
@@ -30,31 +32,34 @@
     align-items: center;
     padding: 40px 0;
   }
-  .logo { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; }
-  .back { font-size: 13px; color: var(--muted); }
+  .logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 15px; }
+  .back { font-size: 13px; color: var(--muted); transition: color 0.15s ease; }
   .back:hover { color: var(--ink); }
 
   .meta {
     font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.3px;
-    margin-bottom: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
   }
   h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(28px, 5vw, 38px);
-    line-height: 1.25;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 40px);
+    letter-spacing: -0.8px;
+    line-height: 1.2;
     max-width: 16ch;
     margin-bottom: 40px;
   }
   h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
     font-size: 21px;
+    letter-spacing: -0.3px;
     margin: 46px 0 14px;
   }
-  p { font-size: 15.5px; color: #3a3230; margin-bottom: 4px; }
+  p { font-size: 15.5px; color: var(--muted); margin-bottom: 4px; }
   .lead { font-size: 17px; color: var(--ink); }
 
   .figure {
@@ -62,9 +67,9 @@
   }
   .figure img {
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
     display: block;
-    border: 1px solid rgba(26,26,26,0.12);
+    border: 1px solid var(--border);
   }
   .figure .caption {
     font-size: 12px;
@@ -81,36 +86,37 @@
   .figure-pair .col .tag {
     font-size: 11px;
     letter-spacing: 0.5px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 8px;
   }
   .figure-pair .col.before .tag { color: var(--muted); }
-  .figure-pair .col.after .tag { color: var(--rose); }
+  .figure-pair .col.after .tag { color: var(--accent); }
   .figure-pair img {
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
     display: block;
-    border: 1px solid rgba(26,26,26,0.12);
+    border: 1px solid var(--border);
   }
   @media (max-width: 560px) {
     .figure-pair { grid-template-columns: 1fr; }
   }
 
   pre {
-    background: #fff;
-    border: 1px solid rgba(26,26,26,0.12);
-    border-radius: 8px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
     padding: 18px;
     overflow-x: auto;
     overflow-y: auto;
     max-height: 500px;
-    font-family: 'Courier New', monospace;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: 12px;
     line-height: 1.6;
     margin: 20px 0;
     white-space: pre;
+    color: #D8D5D0;
   }
-  code { font-family: 'Courier New', monospace; }
+  code { font-family: 'JetBrains Mono', 'Courier New', monospace; }
 
   .cta-row {
     display: flex;
@@ -121,16 +127,18 @@
   .btn {
     display: inline-block;
     font-size: 13px;
-    font-weight: 500;
-    padding: 11px 20px;
-    border-radius: 24px;
+    font-weight: 700;
+    padding: 12px 22px;
+    border-radius: 999px;
+    transition: transform 0.15s ease;
   }
-  .btn-solid { background: var(--ink); color: var(--cream); }
-  .btn-outline { border: 1px solid var(--ink); color: var(--ink); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-solid { background: var(--accent); color: #1A0410; }
+  .btn-outline { border: 1px solid var(--border); color: var(--ink); }
 
   footer {
     padding: 60px 0 60px;
-    border-top: 1px solid rgba(26,26,26,0.12);
+    border-top: 1px solid var(--border);
     margin-top: 60px;
     font-size: 12px;
     color: var(--muted);
@@ -162,7 +170,7 @@
       <img src="label-after-photo.jpg" alt="Clean, printed labels with consistent formatting and QR codes generated by the automated system">
     </div>
   </div>
-  <p style="font-size:13px; color:var(--muted); margin-top:-10px;">Before and after: handwritten and easy to misread versus printed, consistent, and traceable by design.</p>
+  <p style="font-size:13px; color:var(--muted); margin-top:-10px;">Same lot, before and after: handwritten and easy to misread versus printed, consistent, and traceable by design.</p>
 
   <h2>Why it mattered</h2>
   <p>This wasn't just a paperwork annoyance. Duplicates broke the production report itself. A single crate could get logged as produced twice, inflating output numbers. Crates marked "shipped" were sometimes still sitting in the warehouse. Crates that were never produced at all could still land on the production report.</p>
@@ -392,7 +400,7 @@ if __name__ == &quot;__main__&quot;:
   </div>
 
   <footer>
-    Linh Le · Houston, TX · Seattle, WA
+    Linh Le · Houston, TX
   </footer>
 </div>
 </body>

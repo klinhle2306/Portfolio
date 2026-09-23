@@ -287,12 +287,16 @@
     background-repeat: no-repeat;
     background-size: 400% 100%;
     image-rendering: pixelated;
-    animation: walkCycle 0.5s steps(4) infinite;
+    animation: walkCycle 0.5s steps(4, jump-none) infinite;
   }
   @keyframes walkCycle {
     from { background-position-x: 0%; }
     to { background-position-x: 100%; }
   }
+  .walking-kitten.cat-calico,
+  .walking-kitten.cat-gray,
+  .walking-kitten.cat-cream,
+  .walking-kitten.cat-black { width: 66px; }
   .walking-kitten.cat-orange .frame { background-image: url('cat-walk-sheet.png'); }
   .walking-kitten.cat-calico .frame { background-image: url('calico-walk-sheet.png'); }
   .walking-kitten.cat-gray .frame { background-image: url('gray-walk-sheet.png'); }

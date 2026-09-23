@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building a Movie Recommender with Apache Spark — Linh Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wood: #311807;
+    --wood2: #431600;
+    --outline-tan: #bc9253;
+    --parchment: #FFEBCD;
+    --parchment2: #F0A082;
+    --gold: #FFD700;
+    --ink: #1F1308;
+    --green: #228B22;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { image-rendering: pixelated; }
+  body {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--ink);
+    background: var(--wood);
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 2px, transparent 2px, transparent 8px);
+    line-height: 1.4;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+
+  h1, .logo { text-shadow: 2px 2px 0px #000; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 0;
+  }
+  .logo { font-size: 26px; color: var(--gold); }
+  .back { font-size: 20px; color: var(--parchment); padding: 4px 10px; border: 2px solid transparent; }
+  .back:hover { color: var(--gold); border: 2px solid var(--gold); }
+
+  .meta { font-size: 18px; color: var(--gold); text-shadow: 1px 1px 0 #000; margin-bottom: 8px; }
+  h1 { font-size: clamp(26px, 5.5vw, 40px); color: var(--parchment); line-height: 1.25; margin-bottom: 8px; }
+  .byline { font-size: 16px; color: var(--parchment2); margin-bottom: 24px; }
+
+  .panel {
+    background: var(--parchment);
+    border: 4px solid var(--wood);
+    outline: 4px solid var(--outline-tan);
+    outline-offset: -4px;
+    padding: 26px 28px;
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .panel::before, .panel::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border: 2px solid var(--wood);
+  }
+  .panel::before { top: -8px; left: -8px; }
+  .panel::after { bottom: -8px; right: -8px; }
+
+  h2 { font-size: 24px; color: var(--wood2); border-bottom: 2px solid var(--outline-tan); padding-bottom: 6px; margin: 28px 0 12px; }
+  h2:first-child { margin-top: 0; }
+  p { font-size: 20px; color: var(--ink); margin-bottom: 10px; }
+  .lead { font-size: 22px; font-weight: bold; }
+  em { color: var(--wood2); }
+
+  ul, ol { margin: 12px 0 12px 24px; }
+  li { font-size: 20px; color: var(--ink); margin-bottom: 8px; }
+  li strong { color: var(--wood2); }
+
+  .callout {
+    background: var(--parchment2);
+    border: 3px solid var(--wood);
+    border-left: 8px solid var(--green);
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 19px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 17px;
+    background: #fff;
+    border: 3px solid var(--wood);
+  }
+  th, td {
+    border: 1px solid var(--outline-tan);
+    padding: 6px 10px;
+    text-align: left;
+  }
+  th {
+    background: var(--wood2);
+    color: var(--parchment);
+    font-size: 16px;
+  }
+  tr:nth-child(even) { background: var(--parchment2); }
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+
+  pre {
+    background: var(--wood2);
+    color: var(--parchment2);
+    border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan);
+    outline-offset: -2px;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 16px 0;
+    white-space: pre-wrap;
+  }
+
+  .cta-row { display: flex; gap: 14px; margin: 20px 0 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    font-size: 22px;
+    color: var(--parchment);
+    background: var(--wood2);
+    padding: 10px 22px;
+    border: 4px solid var(--wood);
+    outline: 3px solid var(--outline-tan);
+    outline-offset: -3px;
+    transition: none;
+  }
+  .btn:hover { color: var(--ink); background: var(--gold); outline-color: #fff; }
+  .btn:active { transform: translate(2px, 2px); }
+
+  footer { padding: 30px 0 40px; text-align: center; font-size: 16px; color: var(--parchment2); }
+
+  @media (max-width: 560px) { table { font-size: 15px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <a class="back" href="index.html">← Back</a>
+  </header>
+
+  <div class="meta">▸ GRADUATE COURSEWORK · BIG DATA / MACHINE LEARNING</div>
+  <h1>Building a Movie Recommender with Apache Spark</h1>
+  <div class="byline">OMSBA 5240, Big Data Analytics · Seattle University</div>
+
+  <div class="panel">
+    <h2 style="margin-top:0;">THE SETUP</h2>
+    <p class="lead">A fictional movie-review startup, "Ripe Pumpkins," wants a "Pumpkinmeter" score — a personalized recommendation engine like the ones streaming platforms use.</p>
+    <p>I built and tested that recommender using Apache Spark's MLlib ALS (Alternating Least Squares) algorithm on the full MovieLens dataset: roughly 33 million ratings across 86,000 movies from 330,000+ users. Two real people (myself and a family member) each rated 10 movies, and the model generated personalized top-15 recommendations for each of us under two different filtering thresholds, to show the board how the Pumpkinmeter would actually behave in production.</p>
+
+    <h2>THE TECHNICAL APPROACH</h2>
+    <p>Ratings and movie data were loaded as RDDs and parsed with map/filter transformations. I tuned the model's rank parameter on the small MovieLens dataset first, picking whichever rank gave the lowest RMSE on a validation split, then trained the final model on the complete dataset and evaluated it on a held-out test split.</p>
+    <p>To generate personal recommendations, each new user's 10 ratings were unioned into the full dataset, the model was retrained, and <code>predictAll()</code> scored every movie that user hadn't already rated. Candidates were then filtered by a minimum ratings-count threshold (25 vs. 100) and ranked by predicted rating to produce the final top 15.</p>
+
+    <h2>DEBUGGING: WHEN THE TUTORIAL'S ASSUMPTIONS DON'T HOLD</h2>
+    <p>The first run failed immediately — a <code>Py4JJavaError</code> claiming the input path didn't exist. The tutorial hardcodes a path that assumes one specific zip-extraction layout, but depending on how the archive unpacks, the real files can end up nested one folder deeper than expected.</p>
+    <p>Instead of hand-fixing the path once and hoping it held, I wrote a small <code>find_dataset_folder()</code> helper that checks both possible locations — and falls back to walking the folder tree — for both the small and complete datasets. If the files genuinely aren't there, it raises a clear error naming exactly which paths it checked, instead of a cryptic Java stack trace.</p>
+
+    <pre><code>def find_dataset_folder(base_path, dataset_name):
+    """
+    Locate the ratings/movies CSVs regardless of how the zip
+    extracted. Checks the expected path first, then the common
+    'nested folder' variant, then falls back to a tree walk.
+    Raises a clear error listing every path checked if nothing
+    is found -- no cryptic Py4JJavaError.
+    """
+    candidates = [
+        os.path.join(base_path, dataset_name),
+        os.path.join(base_path, dataset_name, dataset_name),
+    ]
+    for path in candidates:
+        if os.path.exists(os.path.join(path, "ratings.csv")):
+            return path
+
+    for root, dirs, files in os.walk(base_path):
+        if "ratings.csv" in files:
+            return root
+
+    raise FileNotFoundError(
+        f"Could not find ratings.csv. Checked: {candidates}"
+    )</code></pre>
+
+    <p>A second, smaller issue: MovieLens titles with an internal comma get quoted in the CSV (e.g. <em>"Shawshank Redemption, The (1994)"</em>), but naive <code>line.split(",")</code> parsing ignores those quotes, truncating several titles in the raw output. It's a display-only issue — the predicted rating and rating count are unaffected — so I used the corrected full titles throughout this report while leaving the raw output flagged as-is in the notebook.</p>
+
+    <h2>RESULTS</h2>
+    <p>Top recommendations for User 1, compared across both filtering thresholds:</p>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Scenario 1 (≥25 ratings)</th><th>Predicted</th><th>Scenario 2 (≥100 ratings)</th><th>Predicted</th></tr>
+      <tr><td>Wallace &amp; Gromit: Best of Aardman</td><td>4.71</td><td>The Shawshank Redemption</td><td>4.70</td></tr>
+      <tr><td>The Shawshank Redemption</td><td>4.70</td><td>Star Wars: Episode IV</td><td>4.58</td></tr>
+      <tr><td>Patton</td><td>4.62</td><td>Schindler's List</td><td>4.58</td></tr>
+      <tr><td>The Philadelphia Story</td><td>4.59</td><td>The Princess Bride</td><td>4.55</td></tr>
+      <tr><td>Star Wars: Episode IV</td><td>4.58</td><td>The Godfather</td><td>4.53</td></tr>
+    </table>
+    </div>
+    <p style="font-size:16px; color:var(--wood2);">Full top-15 lists for both users and both scenarios are in the notebook and report.</p>
+
+    <h2>INSIGHTS FOR THE BOARD</h2>
+    <div class="callout">
+      <strong>Discovery vs. reliability is a product lever, not a fixed setting.</strong> The lower threshold (25 ratings) surfaces niche, cult titles a user might never find on their own — but with far less social proof behind them. The higher threshold (100) trades that discovery value for titles hundreds of other users have already validated. Ripe Pumpkins could offer both as modes: a "Discover" setting for exploration, a "Safe Bet" setting for users who bounce off unfamiliar recommendations.
+    </div>
+    <div class="callout">
+      <strong>The model matches rating behavior, not genre.</strong> User 1 rated only animated/family films highly, yet the model's top recommendations were almost entirely adult dramas and classics. ALS collaborative filtering finds people with similar rating patterns across the <em>whole</em> catalog, not similar genres. That's by design, but it needs in-product framing ("customers with similar taste also loved...") so it doesn't read as a mismatch to end users.
+    </div>
+    <div class="callout">
+      <strong>Raw predicted ratings aren't comparable across users.</strong> User 2 rates everything lower on average, so even their best recommendations only reached ~3.1–3.4, versus User 1's 4.5–4.7. A single platform-wide "recommend if predicted &gt; X" cutoff would systematically under-serve naturally harsher raters. Scores should be normalized against each user's own rating history, not compared on a shared raw scale.
+    </div>
+
+    <div class="cta-row">
+      <a class="btn" href="Le-DataTranslationChallenge.ipynb" target="_blank">View the notebook →</a>
+    </div>
+  </div>
+
+  <footer>Linh Le · Houston, TX</footer>
+</div>
+</body>
+</html>

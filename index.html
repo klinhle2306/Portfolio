@@ -282,21 +282,27 @@
     animation: walkAcross linear infinite;
   }
   .walking-kitten .frame {
-    width: 63px;
-    height: 57px;
-    background-image: url('cat-walk-sheet.png');
-    background-size: 252px 57px;
+    width: 100%;
+    height: 100%;
     background-repeat: no-repeat;
+    background-size: 400% 100%;
     image-rendering: pixelated;
     animation: walkCycle 0.5s steps(4) infinite;
   }
   @keyframes walkCycle {
-    from { background-position-x: 0px; }
-    to { background-position-x: -252px; }
+    from { background-position-x: 0%; }
+    to { background-position-x: 100%; }
   }
+  .walking-kitten.cat-orange .frame { background-image: url('cat-walk-sheet.png'); }
+  .walking-kitten.cat-calico .frame { background-image: url('calico-walk-sheet.png'); }
+  .walking-kitten.cat-gray .frame { background-image: url('gray-walk-sheet.png'); }
+  .walking-kitten.cat-cream .frame { background-image: url('cream-walk-sheet.png'); }
+  .walking-kitten.cat-black .frame { background-image: url('black-walk-sheet.png'); }
   .walking-kitten.k1 { animation-duration: 16s; animation-delay: 0s; }
-  .walking-kitten.k2 { animation-duration: 20s; animation-delay: 5s; }
-  .walking-kitten.k3 { animation-duration: 24s; animation-delay: 11s; }
+  .walking-kitten.k2 { animation-duration: 19s; animation-delay: 4s; }
+  .walking-kitten.k3 { animation-duration: 22s; animation-delay: 8s; }
+  .walking-kitten.k4 { animation-duration: 25s; animation-delay: 12s; }
+  .walking-kitten.k5 { animation-duration: 28s; animation-delay: 16s; }
   @keyframes walkAcross {
     0% { left: -70px; }
     100% { left: calc(100% + 10px); }
@@ -423,9 +429,11 @@
 </div>
 
 <div class="kitten-strip">
-  <div class="walking-kitten k1"><div class="frame"></div></div>
-  <div class="walking-kitten k2"><div class="frame"></div></div>
-  <div class="walking-kitten k3"><div class="frame"></div></div>
+  <div class="walking-kitten cat-orange k1"><div class="frame"></div></div>
+  <div class="walking-kitten cat-calico k2"><div class="frame"></div></div>
+  <div class="walking-kitten cat-gray k3"><div class="frame"></div></div>
+  <div class="walking-kitten cat-cream k4"><div class="frame"></div></div>
+  <div class="walking-kitten cat-black k5"><div class="frame"></div></div>
 </div>
 
 </body>

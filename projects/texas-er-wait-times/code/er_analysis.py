@@ -141,7 +141,8 @@ def chart_data_availability(df, path=GRAPHS_DIR / "er_chart_missing.png"):
         ax.text(i, u / 2, str(u), ha="center", va="center", color=PARCHMENT, fontweight="bold")
     ax.set_ylabel("Texas hospitals")
     ax.set_title("Not every hospital reports every number")
-    ax.legend(frameon=False)
+    ax.set_ylim(0, 480)
+    ax.legend(frameon=False, loc="upper center", ncol=2)
     style(ax)
     plt.tight_layout(); plt.savefig(path, dpi=150); plt.close()
 
@@ -185,7 +186,7 @@ def chart_lwbs(er, path=GRAPHS_DIR / "er_chart_lwbs.png"):
     w["q"] = pd.qcut(w["OP_18b"], 4, labels=["Fastest\n25%", "2nd", "3rd", "Slowest\n25%"])
     means = w.groupby("q", observed=True)["OP_22"].mean()
     fig, ax = plt.subplots(figsize=(8, 4))
-    colors = [GREEN, GREEN, PEACH, "#C4536B"]
+    colors = [GREEN, "#9BC26B", PEACH, "#C4536B"]
     ax.bar(means.index.astype(str), means.values, color=colors, edgecolor=WOOD, linewidth=2)
     for i, v in enumerate(means.values):
         ax.text(i, v + 0.04, f"{v:.1f}%", ha="center", color=WOOD, fontweight="bold")
@@ -197,7 +198,7 @@ def chart_lwbs(er, path=GRAPHS_DIR / "er_chart_lwbs.png"):
 def chart_houston(df, path=GRAPHS_DIR / "er_chart_houston.png"):
     """Dot plot: every Harris County hospital, colored by star rating."""
     h = df[(df["County/Parish"] == "HARRIS") & df["OP_18b"].notna()].sort_values("OP_18b")
-    star_colors = {5: GOLD, 4: GREEN, 3: TAN, 2: PEACH, 1: "#C4536B"}
+    star_colors = {5: GOLD, 4: GREEN, 3: "#6F8FB5", 2: PEACH, 1: "#C4536B"}
     fig, ax = plt.subplots(figsize=(8, 9))
     y = np.arange(len(h))
     med = h["OP_18b"].median()

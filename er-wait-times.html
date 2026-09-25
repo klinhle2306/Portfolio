@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Long Will You Actually Be in a Texas ER? — Linh Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wood: #311807;
+    --wood2: #431600;
+    --outline-tan: #bc9253;
+    --parchment: #FFEBCD;
+    --parchment2: #F0A082;
+    --gold: #FFD700;
+    --ink: #1F1308;
+    --green: #228B22;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { image-rendering: pixelated; }
+  body {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--ink);
+    background: var(--wood);
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 2px, transparent 2px, transparent 8px);
+    line-height: 1.4;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+
+  h1, .logo { text-shadow: 2px 2px 0px #000; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 0;
+  }
+  .logo { font-size: 26px; color: var(--gold); }
+  .back { font-size: 20px; color: var(--parchment); padding: 4px 10px; border: 2px solid transparent; }
+  .back:hover { color: var(--gold); border: 2px solid var(--gold); }
+
+  .meta { font-size: 18px; color: var(--gold); text-shadow: 1px 1px 0 #000; margin-bottom: 8px; }
+  h1 { font-size: clamp(26px, 5.5vw, 40px); color: var(--parchment); line-height: 1.25; margin-bottom: 8px; }
+  .byline { font-size: 16px; color: var(--parchment2); margin-bottom: 24px; }
+
+  .panel {
+    background: var(--parchment);
+    border: 4px solid var(--wood);
+    outline: 4px solid var(--outline-tan);
+    outline-offset: -4px;
+    padding: 26px 28px;
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .panel::before, .panel::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border: 2px solid var(--wood);
+  }
+  .panel::before { top: -8px; left: -8px; }
+  .panel::after { bottom: -8px; right: -8px; }
+
+  h2 { font-size: 24px; color: var(--wood2); border-bottom: 2px solid var(--outline-tan); padding-bottom: 6px; margin: 28px 0 12px; }
+  h2:first-child { margin-top: 0; }
+  p { font-size: 20px; color: var(--ink); margin-bottom: 10px; }
+  .lead { font-size: 22px; font-weight: bold; }
+  em { color: var(--wood2); }
+
+  ul, ol { margin: 12px 0 12px 24px; }
+  li { font-size: 20px; color: var(--ink); margin-bottom: 8px; }
+  li strong { color: var(--wood2); }
+
+  .callout {
+    background: var(--parchment2);
+    border: 3px solid var(--wood);
+    border-left: 8px solid var(--green);
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 19px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 17px;
+    background: #fff;
+    border: 3px solid var(--wood);
+  }
+  th, td {
+    border: 1px solid var(--outline-tan);
+    padding: 6px 10px;
+    text-align: left;
+  }
+  th {
+    background: var(--wood2);
+    color: var(--parchment);
+    font-size: 16px;
+  }
+  tr:nth-child(even) { background: var(--parchment2); }
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+
+  pre {
+    background: var(--wood2);
+    color: var(--parchment2);
+    border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan);
+    outline-offset: -2px;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 16px 0;
+    white-space: pre-wrap;
+  }
+
+  .cta-row { display: flex; gap: 14px; margin: 20px 0 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    font-size: 22px;
+    color: var(--parchment);
+    background: var(--wood2);
+    padding: 10px 22px;
+    border: 4px solid var(--wood);
+    outline: 3px solid var(--outline-tan);
+    outline-offset: -3px;
+    transition: none;
+  }
+  .btn:hover { color: var(--ink); background: var(--gold); outline-color: #fff; }
+  .btn:active { transform: translate(2px, 2px); }
+
+  footer { padding: 30px 0 40px; text-align: center; font-size: 16px; color: var(--parchment2); }
+
+  @media (max-width: 560px) { table { font-size: 15px; } }
+  .figure { margin: 18px 0; }
+  .figure img { max-width: 100%; display: block; border: 3px solid var(--wood); outline: 2px solid var(--outline-tan); outline-offset: -2px; image-rendering: auto; }
+  .figure .caption { font-size: 16px; color: #6b5a44; margin-top: 8px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+  .stat { background: var(--parchment2); border: 3px solid var(--wood); box-shadow: inset 3px 3px 0 rgba(0,0,0,0.3), inset -3px -3px 0 rgba(255,255,255,0.2); padding: 12px; text-align: center; }
+  .stat .num { font-size: 26px; color: var(--wood2); font-weight: bold; }
+  .stat .label { font-size: 15px; color: #6b5a44; margin-top: 4px; }
+  @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <a class="back" href="index.html">← Back</a>
+  </header>
+
+  <div class="meta">▸ DATA ANALYSIS · HEALTHCARE OPERATIONS</div>
+  <h1>How Long Will You Actually Be in a Texas ER?</h1>
+  <div class="byline">CMS hospital data · 401 Texas hospitals · Oct 2024 to Sep 2025</div>
+
+  <div class="panel">
+    <h2 style="margin-top:0;">THE QUESTION</h2>
+    <p class="lead">Everyone has an ER horror story. I wanted to know what actually predicts a long one, and whether the hospital ratings people look up tell you anything useful.</p>
+    <p>CMS, the federal agency behind Medicare, publishes emergency department numbers for nearly every hospital in the country. I focused on Texas and three measures:</p>
+    <ul>
+      <li><strong>ER time (OP-18b):</strong> median minutes from walking in to walking out, for patients who were sent home. It's the whole visit, not just the wait to see a doctor.</li>
+      <li><strong>Left before being seen (OP-22):</strong> the percent of patients who gave up and walked out.</li>
+      <li><strong>ER volume (EDV):</strong> whether a hospital's ER is low, medium, high, or very high volume.</li>
+    </ul>
+    <p>I joined those to CMS's hospital directory for each hospital's 1-to-5 star rating, hospital type, and ownership.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num">137 min</div><div class="label">median Texas ER visit</div></div>
+      <div class="stat"><div class="num">148 min</div><div class="label">median for the whole US</div></div>
+      <div class="stat"><div class="num">367 min</div><div class="label">slowest ER in Texas</div></div>
+    </div>
+
+    <h2>CLEANING THE DATA FIRST</h2>
+    <p>Before any analysis, the first question was how much of this data is actually there. Plenty isn't. <strong>69 of 401 Texas hospitals (17%) report no ER time at all</strong>, and 103 have no "left before being seen" number.</p>
+    <div class="figure">
+      <img src="er_chart_missing.png" alt="Stacked bar chart showing how many Texas hospitals report each ER measure versus Not Available">
+    </div>
+    <p>CMS marks every gap with a footnote code, so I looked up what each one means instead of guessing. Most missing values are footnote 5 ("results not available for this reporting period") or 19 (the hospital doesn't take part in CMS's quality reporting). All of those are treated as missing, never as zero, since a zero would read as the fastest ER in the state.</p>
+    <p>The trickier ones were 23 hospitals that do have a number but carry footnote 3: <em>"results are based on a shorter time period than required."</em> Those numbers are shakier, so I kept them but flagged them, then re-ran every headline result without them. Nothing changed.</p>
+    <p>One more wrinkle: 18 hospitals in the ER file don't appear in the hospital directory at all, most likely because they opened or closed between the two data releases. They stay in the ER-time analysis but can't be used for the star-rating comparison.</p>
+
+    <h2>FINDING 1: BIG ERS ARE SLOWER, AND TEXAS IS FASTER</h2>
+    <p>The strongest pattern in the data is size. Low-volume ERs run about two hours; high-volume ones run close to three. Small rural hospitals (CMS calls them Critical Access Hospitals) have a median of 111 minutes, versus 152 for standard acute care hospitals.</p>
+    <p>Texas's overall median beats the national one, and my first suspicion was that Texas just has more small hospitals pulling its average down. It doesn't. Comparing hospitals of the same size, <strong>Texas is faster at every tier</strong>, and the gap widens as ERs get bigger: very high volume Texas ERs run 164 minutes against 197 nationally.</p>
+    <div class="figure">
+      <img src="er_chart_volume.png" alt="Grouped bar chart of median ER minutes by volume tier, Texas versus rest of US">
+    </div>
+
+    <h2>FINDING 2: STAR RATINGS DON'T PREDICT ER TIME</h2>
+    <p>This was the one I most wanted to test. If you're choosing an ER, is a five-star hospital a safer bet for a shorter visit? The data says no. The correlation between star rating and ER time is essentially zero (Spearman ρ = 0.02, p = 0.84), and it stays near zero even when comparing hospitals of the same size.</p>
+    <div class="figure">
+      <img src="er_chart_stars.png" alt="Strip plot of ER minutes by star rating, showing flat medians across all ratings">
+      <div class="caption">Each dot is a hospital. The dark line is the median for that rating. Only 189 Texas hospitals have a star rating, mostly larger ones.</div>
+    </div>
+    <p>That isn't a knock on star ratings. They're built from mortality, safety, readmissions, and patient surveys, and they measure something real. They just aren't measuring how fast the ER moves.</p>
+
+    <h2>FINDING 3: SLOW ERS LOSE PATIENTS</h2>
+    <p>The share of patients who leave without being seen climbs as ERs get slower. In the slowest quarter of Texas hospitals it's <strong>nearly double</strong> the rate in the fastest quarter. The absolute numbers are small, but every one of those is a person who needed care badly enough to go to an ER and didn't get it.</p>
+    <div class="figure">
+      <img src="er_chart_lwbs.png" alt="Bar chart of percent who left before being seen, by ER speed quartile">
+    </div>
+
+    <h2>ZOOMING IN ON HOUSTON</h2>
+    <p>Harris County has 30 hospitals with ER data, and the ranking doesn't follow the star ratings at all. <strong>None of the five-star Houston Methodist hospitals make the county's fastest ten, while six of those ten are HCA Houston Healthcare hospitals rated two to four stars.</strong> The large Memorial Hermann hospitals cluster at the slow end, at around four hours.</p>
+    <div class="figure">
+      <img src="er_chart_houston.png" alt="Dot plot of every Harris County hospital's median ER minutes, colored by star rating">
+    </div>
+    <p>At the very bottom is Harris Health, the county's public hospital system, at just over six hours. Across all of Texas, the only ER that comes close is University Health in San Antonio, which is Bexar County's public system. That's not a coincidence. County safety-net hospitals see the patients with nowhere else to go, often sicker and often uninsured, and many come in through the ER because it's the one door that has to stay open. Their ER times say as much about the region's healthcare gaps as about the hospitals themselves.</p>
+
+    <div class="callout">
+      <strong>What this means depends on who's asking.</strong> For a patient, a hospital's star rating is a poor guide to how long an ER visit will take, and size is a better one. For hospital operations teams, "left before being seen" is worth tracking right alongside ER time, since slow ERs are quietly losing patients. And for anyone ranking hospitals, the slowest ERs in the state are the public ones carrying the heaviest load, which is a capacity story more than a quality story.
+    </div>
+
+    <h2>LIMITATIONS</h2>
+    <ul>
+      <li>ER time covers the whole visit for patients who were sent home, not the wait to see a clinician, and it leaves out admitted, mental health, and transfer patients.</li>
+      <li>Every median here is a median of hospital-level medians. A tiny rural ER counts the same as a huge urban one.</li>
+      <li>These are correlations. The data can show that slower ERs lose more patients, not that speed alone causes it.</li>
+      <li>The CMS files were pulled from public GitHub mirrors of the official datasets, and the hospital directory's exact release date isn't documented.</li>
+    </ul>
+
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/klinhle2306/Portfolio/blob/main/er_analysis.py" target="_blank">View analysis code on GitHub →</a>
+    </div>
+  </div>
+
+  <footer>Linh Le · Houston, TX</footer>
+</div>
+</body>
+</html>

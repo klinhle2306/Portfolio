@@ -8,8 +8,11 @@ Data
 ----
 - CMS "Timely and Effective Care - Hospital" emergency department measures
   (OP-18b, OP-22, EDV), reporting period Oct 2024 - Sep 2025 for OP-18b.
-  Copy obtained from a public GitHub mirror of the CMS file.
+  Official source: https://data.cms.gov/provider-data/dataset/yv7e-xc69
+  Copy downloaded from github.com/ZzzzzzT233/emergency-department-access-dashboard
 - CMS "Hospital General Information" (star rating, hospital type, ownership).
+  Official source: https://data.cms.gov/provider-data/dataset/xubh-q36u
+  Copy downloaded from github.com/anurao0328/Hospital-Performance-Quality-Analytics
 
 Key measures
 ------------
@@ -32,8 +35,13 @@ import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 
-ED_PATH = "ed_raw.csv"
-INFO_PATH = "hosp_info.csv"
+from pathlib import Path
+
+# Paths are relative to this file, so the script runs from anywhere
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+ED_PATH = PROJECT_DIR / "data" / "ed_raw.csv"
+INFO_PATH = PROJECT_DIR / "data" / "hosp_info.csv"
+GRAPHS_DIR = PROJECT_DIR / "graphs"
 VOLUME_ORDER = ["low", "medium", "high", "very high"]
 
 # Site palette so the charts match the portfolio's Stardew Valley theme
@@ -119,7 +127,7 @@ def style(ax):
     ax.spines[["left", "bottom"]].set_linewidth(2)
 
 
-def chart_data_availability(df, path="er_chart_missing.png"):
+def chart_data_availability(df, path=GRAPHS_DIR / "er_chart_missing.png"):
     """Stacked bar: how many Texas hospitals actually report each measure."""
     labels = ["ER time\n(OP-18b)", "Left before\nseen (OP-22)", "ER volume\n(EDV)"]
     usable = [df[m].notna().sum() for m in ["OP_18b", "OP_22", "EDV"]]
@@ -138,7 +146,7 @@ def chart_data_availability(df, path="er_chart_missing.png"):
     plt.tight_layout(); plt.savefig(path, dpi=150); plt.close()
 
 
-def chart_volume(vol, path="er_chart_volume.png"):
+def chart_volume(vol, path=GRAPHS_DIR / "er_chart_volume.png"):
     """Grouped bar: median ER minutes by volume tier, Texas vs rest of US."""
     x = np.arange(len(VOLUME_ORDER)); w = 0.38
     fig, ax = plt.subplots(figsize=(8, 4.2))
@@ -155,7 +163,7 @@ def chart_volume(vol, path="er_chart_volume.png"):
     plt.tight_layout(); plt.savefig(path, dpi=150); plt.close()
 
 
-def chart_stars(er, path="er_chart_stars.png"):
+def chart_stars(er, path=GRAPHS_DIR / "er_chart_stars.png"):
     """Strip + median line: ER minutes by star rating."""
     s = er[er["stars"].notna()]
     fig, ax = plt.subplots(figsize=(8, 4.2))
@@ -171,7 +179,7 @@ def chart_stars(er, path="er_chart_stars.png"):
     style(ax); plt.tight_layout(); plt.savefig(path, dpi=150); plt.close()
 
 
-def chart_lwbs(er, path="er_chart_lwbs.png"):
+def chart_lwbs(er, path=GRAPHS_DIR / "er_chart_lwbs.png"):
     """Bar: % who left before being seen, by ER speed quartile."""
     w = er[er["OP_22"].notna()].copy()
     w["q"] = pd.qcut(w["OP_18b"], 4, labels=["Fastest\n25%", "2nd", "3rd", "Slowest\n25%"])
@@ -186,7 +194,7 @@ def chart_lwbs(er, path="er_chart_lwbs.png"):
     style(ax); plt.tight_layout(); plt.savefig(path, dpi=150); plt.close()
 
 
-def chart_houston(df, path="er_chart_houston.png"):
+def chart_houston(df, path=GRAPHS_DIR / "er_chart_houston.png"):
     """Dot plot: every Harris County hospital, colored by star rating."""
     h = df[(df["County/Parish"] == "HARRIS") & df["OP_18b"].notna()].sort_values("OP_18b")
     star_colors = {5: GOLD, 4: GREEN, 3: TAN, 2: PEACH, 1: "#C4536B"}

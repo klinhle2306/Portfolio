@@ -6,9 +6,10 @@ claims — actually predict a better-rated product? Or does it just cost
 less/more without moving customer satisfaction?
 
 Data: 1,472 Sephora skincare products (Label, Brand, Name, Price, Rank
-[1-5 star rating], Ingredients, and skin-type flags). Source: public
-GitHub mirror of a Sephora product dataset originally used for beauty/
-consumer-insights analysis practice.
+[1-5 star rating], Ingredients, and skin-type flags).
+Official source: "Cosmetics datasets" by kingabzpro on Kaggle,
+https://www.kaggle.com/datasets/kingabzpro/cosmetics-datasets
+Copy downloaded from github.com/korrina117/cosmetics-consumer-insights-analysis
 
 Method: A product is flagged "fragrance-free" if its ingredient list
 does not mention "fragrance" or "parfum" (the standard label terms for
@@ -23,7 +24,12 @@ import pandas as pd
 from scipy import stats
 import matplotlib.pyplot as plt
 
-DATA_PATH = "cosmetics.csv"
+from pathlib import Path
+
+# Paths are relative to this file, so the script runs from anywhere
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = PROJECT_DIR / "data" / "cosmetics.csv"
+GRAPHS_DIR = PROJECT_DIR / "graphs"
 
 
 def load_data(path: str = DATA_PATH) -> pd.DataFrame:
@@ -128,7 +134,7 @@ def category_breakdown(df: pd.DataFrame, min_group_size: int = 5) -> pd.DataFram
     return pd.DataFrame(rows)
 
 
-def plot_rank_distribution(df: pd.DataFrame, out_path: str = "chart_rank_distribution.png") -> None:
+def plot_rank_distribution(df: pd.DataFrame, out_path=GRAPHS_DIR / "chart_rank_distribution.png") -> None:
     """
     Histogram of the raw Rank column, run BEFORE cleaning, to visually
     show why the 19 zero-rank products look like a data artifact rather
@@ -149,7 +155,7 @@ def plot_rank_distribution(df: pd.DataFrame, out_path: str = "chart_rank_distrib
     plt.close()
 
 
-def plot_overall_comparison(summary: dict, out_path: str = "chart_overall.png") -> None:
+def plot_overall_comparison(summary: dict, out_path=GRAPHS_DIR / "chart_overall.png") -> None:
     """Bar chart comparing average rating and price, fragrance-free vs. fragranced."""
     fig, axes = plt.subplots(1, 2, figsize=(9, 4))
 
@@ -169,7 +175,7 @@ def plot_overall_comparison(summary: dict, out_path: str = "chart_overall.png") 
     plt.close()
 
 
-def plot_category_breakdown(cat_df: pd.DataFrame, out_path: str = "chart_by_category.png") -> None:
+def plot_category_breakdown(cat_df: pd.DataFrame, out_path=GRAPHS_DIR / "chart_by_category.png") -> None:
     """Grouped bar chart of average rating by category, fragrance-free vs. fragranced."""
     fig, ax = plt.subplots(figsize=(9, 5))
     x = range(len(cat_df))

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing production traceability at ChenMega — Linh Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wood: #311807;
+    --wood2: #431600;
+    --outline-tan: #bc9253;
+    --parchment: #FFEBCD;
+    --parchment2: #F0A082;
+    --gold: #FFD700;
+    --ink: #1F1308;
+    --green: #228B22;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { image-rendering: pixelated; }
+  body {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--ink);
+    background: var(--wood);
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 2px, transparent 2px, transparent 8px);
+    line-height: 1.4;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+
+  h1, .logo { text-shadow: 2px 2px 0px #000; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 0;
+  }
+  .logo { font-size: 26px; color: var(--gold); }
+  .back { font-size: 20px; color: var(--parchment); padding: 4px 10px; border: 2px solid transparent; }
+  .back:hover { color: var(--gold); border: 2px solid var(--gold); }
+
+  .meta { font-size: 18px; color: var(--gold); text-shadow: 1px 1px 0 #000; margin-bottom: 10px; }
+  h1 { font-size: clamp(28px, 5.5vw, 42px); color: var(--parchment); line-height: 1.2; margin-bottom: 24px; }
+
+  .panel {
+    background: var(--parchment);
+    border: 4px solid var(--wood);
+    outline: 4px solid var(--outline-tan);
+    outline-offset: -4px;
+    padding: 26px 28px;
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .panel::before, .panel::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border: 2px solid var(--wood);
+  }
+  .panel::before { top: -8px; left: -8px; }
+  .panel::after { bottom: -8px; right: -8px; }
+
+  h2 { font-size: 24px; color: var(--wood2); border-bottom: 2px solid var(--outline-tan); padding-bottom: 6px; margin: 28px 0 12px; }
+  h2:first-child { margin-top: 0; }
+  p { font-size: 20px; color: var(--ink); margin-bottom: 10px; }
+  .lead { font-size: 22px; font-weight: bold; }
+
+  .figure { margin: 20px 0; }
+  .figure img {
+    max-width: 100%;
+    display: block;
+    border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan);
+    outline-offset: -2px;
+  }
+  .figure .caption { font-size: 16px; color: #6b5a44; margin-top: 8px; }
+
+  .figure-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .figure-pair .col .tag { font-size: 16px; font-weight: bold; margin-bottom: 6px; }
+  .figure-pair .col.before .tag { color: #6b5a44; }
+  .figure-pair .col.after .tag { color: var(--green); }
+  .figure-pair img {
+    max-width: 100%;
+    display: block;
+    border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan);
+    outline-offset: -2px;
+  }
+  @media (max-width: 560px) { .figure-pair { grid-template-columns: 1fr; } }
+
+  pre {
+    background: var(--wood2);
+    color: var(--parchment2);
+    border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan);
+    outline-offset: -2px;
+    padding: 16px;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 460px;
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 16px 0;
+    white-space: pre;
+  }
+
+  .cta-row { display: flex; gap: 14px; margin: 20px 0 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    font-size: 22px;
+    color: var(--parchment);
+    background: var(--wood2);
+    padding: 10px 22px;
+    border: 4px solid var(--wood);
+    outline: 3px solid var(--outline-tan);
+    outline-offset: -3px;
+    transition: none;
+  }
+  .btn:hover { color: var(--ink); background: var(--gold); outline-color: #fff; }
+  .btn:active { transform: translate(2px, 2px); }
+
+  footer { padding: 30px 0 40px; text-align: center; font-size: 16px; color: var(--parchment2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">linh le</div>
+    <a class="back" href="../../index.html">← Back</a>
+  </header>
+
+  <div class="meta">▸ CASE STUDY · OPERATIONS / SYSTEMS DESIGN</div>
+  <h1>Fixing production traceability at ChenMega</h1>
+
+  <div class="panel">
+    <h2>THE PROBLEM</h2>
+    <p class="lead">Crate and serial numbers were handwritten in Sharpie, directly on bags of tags.</p>
+    <p>That sounds minor until you see what it actually caused. Handwriting was often hard to read. Sharpie ink rubs off with handling. And once a number faded or smudged, there was no way to confidently trace which serial number belonged to which crate.</p>
+    <p>The numbers also lived in an Excel sheet with no real structure behind it — no validation, no enforced uniqueness. Duplicate crate numbers and duplicate serial numbers showed up regularly, which is a real problem when those numbers are supposed to be unique identifiers.</p>
+
+    <div class="figure-pair">
+      <div class="col before">
+        <div class="tag">BEFORE</div>
+        <img src="pictures/label-before-photo.jpg" alt="Handwritten crate labels on bags with inconsistent handwriting and crossed-out numbers">
+      </div>
+      <div class="col after">
+        <div class="tag">AFTER</div>
+        <img src="pictures/label-after-photo.jpg" alt="Clean, printed labels with consistent formatting and QR codes generated by the automated system">
+      </div>
+    </div>
+    <p style="font-size:16px; color:#6b5a44;">Same lot, before and after: handwritten and easy to misread versus printed, consistent, and traceable by design.</p>
+
+    <h2>WHY IT MATTERED</h2>
+    <p>This wasn't just a paperwork annoyance. Duplicates broke the production report itself. A single crate could get logged as produced twice, inflating output numbers. Crates marked "shipped" were sometimes still sitting in the warehouse. Crates that were never produced at all could still land on the production report.</p>
+    <p>Because there was no reliable way to trace a crate back to its actual serial number, none of this could be caught or corrected after the fact — it just piled up as inventory noise that someone, eventually, had to untangle by hand.</p>
+
+    <h2>WHY IT WAS HARDER THAN "JUST BUILD A SPREADSHEET"</h2>
+    <p>The numbering isn't simple sequential counting. Crate numbers increment by 1. Serial numbers increment by 9, with a skip rule: if the next serial's last two digits would land in an unusable range, the system has to jump to the next valid value instead.</p>
+    <p>Serial numbers can also reset mid-sequence at a specified crate, without disturbing any labels already generated earlier on the sheet. And lot prefixes — L vs. H — have to be applied exactly, since they're not interchangeable.</p>
+
+    <h2>WHAT I BUILT</h2>
+    <p>A rules-based label generation system, built in Python and Node.js, that generates printable label sheets directly from tracked state instead of anyone re-typing or hand-copying numbers.</p>
+    <p>The system encodes the actual rules instead of leaving them to memory: +1 per crate, +9 per serial, the skip logic for invalid ranges, mid-sequence resets, and exact lot-prefix handling. Because every number comes out of the system rather than being transcribed by hand, duplicates become structurally impossible. It also carries continuity across sessions, so starting a new sheet picks up automatically from the last crate and serial used on the previous one.</p>
+
+    <h2>THE RESULT</h2>
+    <p>Every label is now legible, permanent, and traceable back to a specific crate and serial number. The root cause of the mismatch between production reports, shipping records, and actual warehouse inventory is gone, because the system that generates the numbers can't produce a duplicate in the first place.</p>
+    <p>The physical workflow changed too: instead of re-copying numbers by hand onto the daily production report, the printed sticker is peeled off the crate and applied directly to the report. There's no transcription step left to introduce an error.</p>
+
+    <div class="figure">
+      <img src="pictures/production-report.jpg" alt="Daily production report with printed crate labels peeled and applied directly onto the paper, organized in columns by TPM station">
+      <div class="caption">The daily production report in practice: printed labels are peeled off crates and stuck directly onto the report — no re-copying, no misread handwriting.</div>
+    </div>
+
+    <p>The system also has a built-in fallback for damage: if a crate number becomes unreadable — covered in paint, or the sticker is torn — the crate can still be traced through its serial number, since every crate carries both identifiers independently.</p>
+
+    <h2>THE CODE</h2>
+    <p>The full script, including the skip-rule logic, the sheet-layout arrangement, and mid-sequence serial overrides:</p>
+
+    <pre><code>&quot;&quot;&quot;
+generate_label_sheet.py
+
+Generates the crate + serial number sequence used for the Avery tag
+label sheets (60 labels per sheet, arranged 4 columns x 15 rows).
+
+THE CORE RULE
+-------------
+Each crate&#x27;s serial number is the previous one + 9. But whenever that
++9 step would land on a serial number ending in &quot;00&quot; through &quot;08&quot;
+(i.e. it would spill into the next hundred at a &quot;low&quot; value), we skip
+ahead to the next value ending in &quot;09&quot; instead. In practice this means
+serials climb in a repeating pattern of ...09, ...18, ...27, ...36,
+...45, ...54, ...63, ...72, ...81, ...90, ...99, and then jump straight
+to ...09 of the next hundred (skipping the whole &quot;00&quot; band).
+
+Example: ...991, ...100 would normally follow 991 + 9, but since 100
+ends in &quot;00&quot; (which is in the 00-08 forbidden band), we bump it up to
+...109 instead.
+
+HOW TO USE
+----------
+Just edit the four settings under &quot;SHEET SETTINGS&quot; below and run the
+script. It prints the 60 labels in the same left-to-right, top-to-
+bottom order they appear on the printed sheet (column-major fill:
+column 1 gets crates 1-15, column 2 gets crates 16-30, etc.)
+&quot;&quot;&quot;
+
+
+def next_serial(previous_serial: int) -&gt; int:
+    &quot;&quot;&quot;
+    Given the previous serial number, return the next one in the sequence.
+
+    Normally this is just +9. But if that would produce a value whose
+    last two digits are 00 through 08, we skip ahead to the next value
+    ending in 09 instead (this avoids ever producing a serial number
+    that is an exact multiple of 100, or close to one).
+    &quot;&quot;&quot;
+    natural_next = previous_serial + 9
+    last_two_digits = natural_next % 100
+
+    if last_two_digits &lt;= 8:
+        # Bump forward so the last two digits become &quot;09&quot;
+        return natural_next - last_two_digits + 9
+    else:
+        return natural_next
+
+
+def generate_serial_sequence(start_serial: int, count: int) -&gt; list[int]:
+    &quot;&quot;&quot;
+    Build a list of `count` serial numbers, starting at `start_serial`,
+    applying the skip-the-hundred rule at every step after the first.
+    &quot;&quot;&quot;
+    serials = [start_serial]
+    for _ in range(count - 1):
+        serials.append(next_serial(serials[-1]))
+    return serials
+
+
+def arrange_into_grid(labels: list[str], columns: int, rows_per_column: int) -&gt; list[str]:
+    &quot;&quot;&quot;
+    Take a flat list of labels (in crate order) and reorder them so they
+    read correctly on the printed sheet: column 1 top-to-bottom first,
+    then column 2 top-to-bottom, etc. -- but the DOCUMENT itself is
+    filled row-by-row (row 1: col1, col2, col3, col4; row 2: col1, ...),
+    so this function returns the labels in that row-major &quot;reading&quot;
+    order, ready to drop straight into the Word template one at a time.
+    &quot;&quot;&quot;
+    grid_columns = [
+        labels[c * rows_per_column: (c + 1) * rows_per_column]
+        for c in range(columns)
+    ]
+
+    row_major_order = []
+    for row in range(rows_per_column):
+        for col in range(columns):
+            row_major_order.append(grid_columns[col][row])
+
+    return row_major_order
+
+
+def build_label_sheet(
+    label_prefix: str,
+    start_crate: int,
+    start_serial: int,
+    add_tx_suffix: bool = True,
+    total_labels: int = 60,
+    columns: int = 4,
+) -&gt; list[str]:
+    &quot;&quot;&quot;
+    Generate one full sheet of labels.
+    &quot;&quot;&quot;
+    rows_per_column = total_labels // columns
+
+    serials = generate_serial_sequence(start_serial, total_labels)
+    crates = [start_crate + i for i in range(total_labels)]
+
+    suffix = &quot;TX&quot; if add_tx_suffix else &quot;&quot;
+    flat_labels = [
+        f&quot;{label_prefix}       {crate} {serial}{suffix}&quot;
+        for crate, serial in zip(crates, serials)
+    ]
+
+    return arrange_into_grid(flat_labels, columns, rows_per_column)
+
+
+if __name__ == &quot;__main__&quot;:
+    LABEL_PREFIX = &quot;L25750&quot;
+    START_CRATE = 4648
+    START_SERIAL = 2026013036
+    ADD_TX_SUFFIX = True
+
+    labels = build_label_sheet(
+        label_prefix=LABEL_PREFIX,
+        start_crate=START_CRATE,
+        start_serial=START_SERIAL,
+        add_tx_suffix=ADD_TX_SUFFIX,
+    )
+
+    for label in labels:
+        print(label)
+</code></pre>
+
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/klinhle2306/Portfolio/blob/main/projects/chenmega-traceability/code/generate_label_sheet.py" target="_blank">View on GitHub →</a>
+    </div>
+  </div>
+
+  <footer>Linh Le · Houston, TX</footer>
+</div>
+</body>
+</html>

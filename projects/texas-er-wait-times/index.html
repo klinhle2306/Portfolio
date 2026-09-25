@@ -147,6 +147,8 @@
   .stat .num { font-size: 26px; color: var(--wood2); font-weight: bold; }
   .stat .label { font-size: 15px; color: #6b5a44; margin-top: 4px; }
   @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+  .sources li { font-size: 17px; margin-bottom: 10px; }
+  .sources a { color: var(--wood2); text-decoration: underline; word-break: break-word; }
 </style>
 
 </head>
@@ -154,7 +156,7 @@
 <div class="wrap">
   <header>
     <div class="logo">linh le</div>
-    <a class="back" href="index.html">← Back</a>
+    <a class="back" href="../../index.html">← Back</a>
   </header>
 
   <div class="meta">▸ DATA ANALYSIS · HEALTHCARE OPERATIONS</div>
@@ -181,7 +183,7 @@
     <h2>CLEANING THE DATA FIRST</h2>
     <p>Before any analysis, the first question was how much of this data is actually there. Plenty isn't. <strong>69 of 401 Texas hospitals (17%) report no ER time at all</strong>, and 103 have no "left before being seen" number.</p>
     <div class="figure">
-      <img src="er_chart_missing.png" alt="Stacked bar chart showing how many Texas hospitals report each ER measure versus Not Available">
+      <img src="graphs/er_chart_missing.png" alt="Stacked bar chart showing how many Texas hospitals report each ER measure versus Not Available">
     </div>
     <p>CMS marks every gap with a footnote code, so I looked up what each one means instead of guessing. Most missing values are footnote 5 ("results not available for this reporting period") or 19 (the hospital doesn't take part in CMS's quality reporting). All of those are treated as missing, never as zero, since a zero would read as the fastest ER in the state.</p>
     <p>The trickier ones were 23 hospitals that do have a number but carry footnote 3: <em>"results are based on a shorter time period than required."</em> Those numbers are shakier, so I kept them but flagged them, then re-ran every headline result without them. Nothing changed.</p>
@@ -191,13 +193,13 @@
     <p>The strongest pattern in the data is size. Low-volume ERs run about two hours; high-volume ones run close to three. Small rural hospitals (CMS calls them Critical Access Hospitals) have a median of 111 minutes, versus 152 for standard acute care hospitals.</p>
     <p>Texas's overall median beats the national one, and my first suspicion was that Texas just has more small hospitals pulling its average down. It doesn't. Comparing hospitals of the same size, <strong>Texas is faster at every tier</strong>, and the gap widens as ERs get bigger: very high volume Texas ERs run 164 minutes against 197 nationally.</p>
     <div class="figure">
-      <img src="er_chart_volume.png" alt="Grouped bar chart of median ER minutes by volume tier, Texas versus rest of US">
+      <img src="graphs/er_chart_volume.png" alt="Grouped bar chart of median ER minutes by volume tier, Texas versus rest of US">
     </div>
 
     <h2>FINDING 2: STAR RATINGS DON'T PREDICT ER TIME</h2>
     <p>This was the one I most wanted to test. If you're choosing an ER, is a five-star hospital a safer bet for a shorter visit? The data says no. The correlation between star rating and ER time is essentially zero (Spearman ρ = 0.02, p = 0.84), and it stays near zero even when comparing hospitals of the same size.</p>
     <div class="figure">
-      <img src="er_chart_stars.png" alt="Strip plot of ER minutes by star rating, showing flat medians across all ratings">
+      <img src="graphs/er_chart_stars.png" alt="Strip plot of ER minutes by star rating, showing flat medians across all ratings">
       <div class="caption">Each dot is a hospital. The dark line is the median for that rating. Only 189 Texas hospitals have a star rating, mostly larger ones.</div>
     </div>
     <p>That isn't a knock on star ratings. They're built from mortality, safety, readmissions, and patient surveys, and they measure something real. They just aren't measuring how fast the ER moves.</p>
@@ -205,13 +207,13 @@
     <h2>FINDING 3: SLOW ERS LOSE PATIENTS</h2>
     <p>The share of patients who leave without being seen climbs as ERs get slower. In the slowest quarter of Texas hospitals it's <strong>nearly double</strong> the rate in the fastest quarter. The absolute numbers are small, but every one of those is a person who needed care badly enough to go to an ER and didn't get it.</p>
     <div class="figure">
-      <img src="er_chart_lwbs.png" alt="Bar chart of percent who left before being seen, by ER speed quartile">
+      <img src="graphs/er_chart_lwbs.png" alt="Bar chart of percent who left before being seen, by ER speed quartile">
     </div>
 
     <h2>ZOOMING IN ON HOUSTON</h2>
     <p>Harris County has 30 hospitals with ER data, and the ranking doesn't follow the star ratings at all. <strong>None of the five-star Houston Methodist hospitals make the county's fastest ten, while six of those ten are HCA Houston Healthcare hospitals rated two to four stars.</strong> The large Memorial Hermann hospitals cluster at the slow end, at around four hours.</p>
     <div class="figure">
-      <img src="er_chart_houston.png" alt="Dot plot of every Harris County hospital's median ER minutes, colored by star rating">
+      <img src="graphs/er_chart_houston.png" alt="Dot plot of every Harris County hospital's median ER minutes, colored by star rating">
     </div>
     <p>At the very bottom is Harris Health, the county's public hospital system, at just over six hours. Across all of Texas, the only ER that comes close is University Health in San Antonio, which is Bexar County's public system. That's not a coincidence. County safety-net hospitals see the patients with nowhere else to go, often sicker and often uninsured, and many come in through the ER because it's the one door that has to stay open. Their ER times say as much about the region's healthcare gaps as about the hospitals themselves.</p>
 
@@ -227,8 +229,16 @@
       <li>The CMS files were pulled from public GitHub mirrors of the official datasets, and the hospital directory's exact release date isn't documented.</li>
     </ul>
 
+        <h2>SOURCES</h2>
+    <ol class="sources">
+      <li>Centers for Medicare &amp; Medicaid Services. "Timely and Effective Care – Hospital." Provider Data Catalog. Measures OP-18b, OP-22, and EDV. <a href="https://data.cms.gov/provider-data/dataset/yv7e-xc69" target="_blank">data.cms.gov/provider-data/dataset/yv7e-xc69</a></li>
+      <li>Centers for Medicare &amp; Medicaid Services. "Hospital General Information." Provider Data Catalog. Star ratings, hospital type, and ownership. <a href="https://data.cms.gov/provider-data/dataset/xubh-q36u" target="_blank">data.cms.gov/provider-data/dataset/xubh-q36u</a></li>
+      <li>Centers for Medicare &amp; Medicaid Services. "Footnote Crosswalk." Provider Data Catalog. <a href="https://data.cms.gov/provider-data/dataset/y9us-9xdf" target="_blank">data.cms.gov/provider-data/dataset/y9us-9xdf</a>. Footnote definitions as listed by the American Hospital Directory: <a href="https://www.ahd.com/definitions/qual_hqi_footnotes.html" target="_blank">ahd.com/definitions/qual_hqi_footnotes.html</a></li>
+      <li>Copies of the CMS files used for this analysis were downloaded from public GitHub repositories: <a href="https://github.com/ZzzzzzT233/emergency-department-access-dashboard" target="_blank">ZzzzzzT233/emergency-department-access-dashboard</a> (emergency department measures) and <a href="https://github.com/anurao0328/Hospital-Performance-Quality-Analytics" target="_blank">anurao0328/Hospital-Performance-Quality-Analytics</a> (hospital general information).</li>
+    </ol>
+
     <div class="cta-row">
-      <a class="btn" href="https://github.com/klinhle2306/Portfolio/blob/main/er_analysis.py" target="_blank">View analysis code on GitHub →</a>
+      <a class="btn" href="https://github.com/klinhle2306/Portfolio/blob/main/projects/texas-er-wait-times/code/er_analysis.py" target="_blank">View analysis code on GitHub →</a>
     </div>
   </div>
 

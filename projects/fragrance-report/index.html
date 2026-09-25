@@ -124,13 +124,15 @@
   footer { padding: 30px 0 40px; text-align: center; font-size: 16px; color: var(--parchment2); }
 
   @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+  .sources li { font-size: 17px; margin-bottom: 10px; }
+  .sources a { color: var(--wood2); text-decoration: underline; word-break: break-word; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div class="logo">linh le</div>
-    <a class="back" href="index.html">← Back</a>
+    <a class="back" href="../../index.html">← Back</a>
   </header>
 
   <div class="meta">▸ DATA ANALYSIS · CONSUMER INSIGHTS / SKINCARE</div>
@@ -146,7 +148,7 @@
     <p>A true 0 would mean "worse than a 1-star product," which isn't how this rating scale works — this almost certainly means "not yet rated," not "rated and hated." The distribution makes the gap obvious: every real rating clusters between 3 and 5 stars, with the 0s sitting in an empty band by themselves.</p>
 
     <div class="figure">
-      <img src="chart_rank_distribution.jpg" alt="Histogram of product ratings showing 19 products at exactly 0, isolated from the normal 3-to-5 star range">
+      <img src="graphs/chart_rank_distribution.jpg" alt="Histogram of product ratings showing 19 products at exactly 0, isolated from the normal 3-to-5 star range">
     </div>
 
     <p>Left in, these zeros would silently drag down the average for whichever group they happened to land in, without reflecting any actual customer opinion. I dropped these 19 rows before running any comparison. The effect was small but directionally important: removing them widened the rating gap between groups and made the result more statistically significant, not less — a sign the zeros were noise, not signal.</p>
@@ -166,7 +168,7 @@
     </div>
 
     <div class="figure">
-      <img src="chart_overall.jpg" alt="Bar chart comparing average rating and price between fragrance-free and fragranced products">
+      <img src="graphs/chart_overall.jpg" alt="Bar chart comparing average rating and price between fragrance-free and fragranced products">
     </div>
 
     <p>So on the surface: going fragrance-free doesn't buy you a better-reviewed product — if anything, the opposite. But that's not the same as "fragrance-free doesn't matter." It just means the value of fragrance-free isn't rating-driven; it's about sensitivity, allergies, and personal preference, which this dataset doesn't measure directly.</p>
@@ -175,7 +177,7 @@
     <p>Averages hide category differences, so I broke it down by product type. Five of six categories follow the overall pattern — fragranced products rate slightly higher. <strong>Sun protection is the exception</strong>: fragrance-free sunscreens rate higher (4.12 vs. 4.04) <em>and</em> cost less than their fragranced counterparts.</p>
 
     <div class="figure">
-      <img src="chart_by_category.jpg" alt="Grouped bar chart of average rating by product category, fragrance-free versus fragranced">
+      <img src="graphs/chart_by_category.jpg" alt="Grouped bar chart of average rating by product category, fragrance-free versus fragranced">
     </div>
 
     <div class="callout">
@@ -188,8 +190,14 @@
     <h2>METHOD NOTE</h2>
     <p>A product was flagged "fragrance-free" if its ingredient list didn't mention "fragrance" or "parfum" — the standard labeling terms for added scent. This is a simple text-presence check, not a certified clean-beauty label, so a handful of scented products using only a named essential oil (without the word "fragrance") may be miscategorized. Good enough for a directional read, not a regulatory claim.</p>
 
+        <h2>SOURCES</h2>
+    <ol class="sources">
+      <li>kingabzpro. "Cosmetics datasets." Kaggle. Ingredient lists, prices, ratings, and skin-type labels for 1,472 Sephora products. <a href="https://www.kaggle.com/datasets/kingabzpro/cosmetics-datasets" target="_blank">kaggle.com/datasets/kingabzpro/cosmetics-datasets</a></li>
+      <li>The copy of the file used for this analysis was downloaded from a public GitHub repository: <a href="https://github.com/korrina117/cosmetics-consumer-insights-analysis" target="_blank">korrina117/cosmetics-consumer-insights-analysis</a> (source_data/cosmetics.csv).</li>
+    </ol>
+
     <div class="cta-row">
-      <a class="btn" href="https://github.com/klinhle2306/Portfolio/blob/main/fragrance_analysis.py" target="_blank">View analysis code on GitHub →</a>
+      <a class="btn" href="https://github.com/klinhle2306/Portfolio/blob/main/projects/fragrance-report/code/fragrance_analysis.py" target="_blank">View analysis code on GitHub →</a>
     </div>
   </div>
 

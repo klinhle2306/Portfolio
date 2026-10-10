@@ -114,6 +114,47 @@
   .btn:hover { color: var(--ink); background: var(--gold); outline-color: #fff; }
   .btn:active { transform: translate(2px, 2px); }
 
+  /* QUEST LOG: experience + skills sneak peek */
+  .quest-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 20px; align-items: start; }
+  .quest-panel { color: var(--ink); }
+  .quest-head {
+    font-size: 22px; color: var(--wood2);
+    border-bottom: 3px solid var(--outline-tan);
+    padding-bottom: 4px; margin: 0 0 10px;
+    text-shadow: none;
+  }
+  .quest-head:not(:first-child) { margin-top: 18px; }
+  .quest-list { list-style: none; margin: 0; padding: 0; }
+  .quest-list li { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+  .quest-icon {
+    flex: 0 0 40px; width: 40px; height: 40px;
+    background: var(--parchment2);
+    border: 3px solid var(--wood);
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.3), inset -2px -2px 0 rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .quest-icon img { width: 26px; height: 26px; image-rendering: pixelated; }
+  .quest-title { font-size: 20px; line-height: 1.1; color: var(--ink); }
+  .quest-sub { font-size: 17px; font-style: italic; color: #6b5a44; line-height: 1.15; }
+  .quest-sub .now { font-style: normal; color: var(--green); }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 17px; line-height: 1.1; color: var(--wood2);
+    background: var(--parchment2);
+    border: 2px solid var(--wood);
+    box-shadow: inset -2px -2px 0 rgba(0,0,0,0.18);
+    padding: 4px 9px;
+  }
+  .chip.tool { background: var(--parchment); }
+  .quest-more {
+    display: inline-block; margin-top: 18px;
+    font-size: 19px; color: var(--parchment); text-decoration: none;
+    background: var(--wood2); border: 3px solid var(--wood);
+    outline: 2px solid var(--outline-tan); outline-offset: -2px;
+    padding: 4px 12px; text-shadow: 2px 2px 0 #000;
+  }
+  .quest-more:hover { background: var(--gold); color: var(--ink); text-shadow: none; }
+
   footer {
     padding: 30px 0 40px;
     text-align: center;
@@ -123,6 +164,7 @@
 
   @media (max-width: 560px) {
     .fact-grid { grid-template-columns: 1fr; }
+    .panel { padding: 20px 18px; }
   }
 </style>
 </head>
@@ -163,6 +205,56 @@
         <div class="k">TOOLS</div>
         <div class="v">SQL, Python, Tableau, Excel, HTML, Machine Learning/AI</div>
       </div>
+    </div>
+  </div>
+
+  <div class="panel quest-panel" id="quests">
+    <h2>▸ QUEST LOG</h2>
+    <h3 class="quest-head">Current quest</h3>
+    <ul class="quest-list">
+      <li><span class="quest-icon"><img src="assets/sprites/icon-quest.png" alt=""></span>
+        <div><div class="quest-title">SQL &amp; Database Architecture Externship</div><div class="quest-sub">Breaking Games · <span class="now">In progress</span></div></div></li>
+    </ul>
+    <h3 class="quest-head">Experience</h3>
+    <ul class="quest-list">
+      <li><span class="quest-icon"><img src="assets/sprites/icon-briefcase.png" alt=""></span>
+        <div><div class="quest-title">Executive Assistant / Project Coordinator</div><div class="quest-sub">ChenMega Machinery LLC · Mar 2026 – Sep 2026</div></div></li>
+      <li><span class="quest-icon"><img src="assets/sprites/icon-briefcase.png" alt=""></span>
+        <div><div class="quest-title">Associate Systems Analyst</div><div class="quest-sub">Expeditors · Feb 2025 – Jul 2025</div></div></li>
+      <li><span class="quest-icon"><img src="assets/sprites/icon-briefcase.png" alt=""></span>
+        <div><div class="quest-title">Quality Assurance Engineer Intern</div><div class="quest-sub">InnovAsian Cuisine Enterprises · Jul 2024 – Dec 2024</div></div></li>
+      <li><span class="quest-icon"><img src="assets/sprites/icon-briefcase.png" alt=""></span>
+        <div><div class="quest-title">Project Manager, Capstone Client Project</div><div class="quest-sub">SDI Engineering / Seattle University · Sep 2023 – Jun 2024</div></div></li>
+      <li><span class="quest-icon"><img src="assets/sprites/icon-briefcase.png" alt=""></span>
+        <div><div class="quest-title">Data Science Research Assistant</div><div class="quest-sub">Seattle University · Jun 2022 – Sep 2022</div></div></li>
+    </ul>
+    <h3 class="quest-head">Education</h3>
+    <ul class="quest-list">
+      <li><span class="quest-icon"><img src="assets/sprites/icon-cap.png" alt=""></span>
+        <div><div class="quest-title">M.S. in Business Analytics</div><div class="quest-sub">Seattle University · Class of 2027</div></div></li>
+      <li><span class="quest-icon"><img src="assets/sprites/icon-cap.png" alt=""></span>
+        <div><div class="quest-title">B.S. in Computer Science (Mathematics Specialization)</div><div class="quest-sub">Seattle University · Minor in Data Science</div></div></li>
+    </ul>
+  </div>
+
+  <div class="panel quest-panel">
+    <h2>▸ SKILLS &amp; TOOLS</h2>
+    <h3 class="quest-head">Skills</h3>
+    <div class="skill-chips">
+      <span class="chip">Stakeholder Interviews &amp; Workshops</span>
+      <span class="chip">EDI Transactions &amp; Integration</span>
+      <span class="chip">Functional &amp; Technical Specifications</span>
+      <span class="chip">Current vs. Future State Analysis</span>
+      <span class="chip">Reports &amp; Presentations</span>
+      <span class="chip">Project Lifecycle &amp; Agile</span>
+    </div>
+    <h3 class="quest-head">Tools</h3>
+    <div class="skill-chips">
+      <span class="chip tool">SQL</span>
+      <span class="chip tool">Python</span>
+      <span class="chip tool">Excel</span>
+      <span class="chip tool">Tableau</span>
+      <span class="chip tool">ERP Systems</span>
     </div>
   </div>
 
